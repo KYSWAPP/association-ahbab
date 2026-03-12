@@ -5,36 +5,232 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
 <meta name="theme-color" content="#1a7a3a"/>
 <title>AHBAB — Elhadji Malick Seye</title>
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 body{background:#f5f7f5;font-family:Georgia,serif;overflow-x:hidden;}
-button,input{font-family:Georgia,serif;}
+button,input{font-family:Georgia,serif;outline:none;}
 ::-webkit-scrollbar{display:none;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.04);}}
 .fade{animation:fadeIn 0.4s ease forwards;}
+.page{display:none;padding-bottom:80px;}
+.page.active{display:block;}
 .pulse{animation:pulse 2s ease infinite;}
+.g{color:#1a7a3a;}
+.btn-don{background:linear-gradient(135deg,#1a7a3a,#27ae60);border:none;border-radius:12px;padding:12px;color:#fff;font-size:13px;font-weight:bold;cursor:pointer;width:100%;font-family:Georgia,serif;}
+.carte{background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 2px 10px rgba(0,0,0,0.06);}
+.progress{background:#f0f0f0;border-radius:99px;height:8px;overflow:hidden;margin-bottom:8px;}
+.bar{height:100%;border-radius:99px;background:linear-gradient(90deg,#1a7a3a,#27ae60);}
+.moyen{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:14px;text-decoration:none;margin-bottom:10px;border:2px solid;}
+.tag{border-radius:10px;padding:2px 8px;font-size:10px;font-weight:bold;display:inline-block;}
+.event{background:#fff;border-radius:16px;padding:14px;margin-bottom:10px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.input{width:100%;background:#f8f8f8;border:1px solid #e0e0e0;border-radius:12px;padding:13px 14px;font-size:13px;font-family:Georgia,serif;margin-bottom:12px;box-sizing:border-box;}
 </style>
 </head>
 <body>
-<div id="root"></div>
-<script type="text/babel">
-const {useState}=React;
-const G="#1a7a3a",GL="#27ae60",W="#fff",BG="#f5f7f5",GOLD="#c9a84c";
-const fmt=n=>(Number(n)||0).toLocaleString("fr-FR");
 
+<!-- HEADER -->
+<div style="background:linear-gradient(135deg,#1a7a3a,#0d4a22);padding:44px 20px 14px;position:sticky;top:0;z-index:50;box-shadow:0 2px 20px rgba(0,0,0,0.2);">
+  <div style="display:flex;justify-content:space-between;align-items:center;max-width:480px;margin:0 auto;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:40px;height:40px;border-radius:20px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:20px;border:2px solid rgba(255,255,255,0.3);">🤲</div>
+      <div>
+        <div style="color:#fff;font-size:17px;font-weight:bold;letter-spacing:1px;">AHBAB</div>
+        <div style="color:rgba(255,255,255,0.65);font-size:10px;">Elhadji Malick Seye</div>
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,0.15);border-radius:20px;padding:5px 12px;display:flex;align-items:center;gap:6px;">
+      <div style="width:7px;height:7px;border-radius:4px;background:#27ae60;"></div>
+      <div style="color:#fff;font-size:10px;">En ligne</div>
+    </div>
+  </div>
+</div>
+
+<!-- WRAPPER -->
+<div style="max-width:480px;margin:0 auto;">
+
+<!-- PAGE ACCUEIL -->
+<div id="pg-accueil" class="page active fade">
+  <div style="background:linear-gradient(160deg,#1a7a3a,#0d4a22);padding:20px 20px 28px;text-align:center;">
+    <div style="color:rgba(255,255,255,0.8);font-size:14px;font-family:serif;margin-bottom:8px;">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+    <div style="color:#fff;font-size:20px;font-weight:bold;line-height:1.4;margin-bottom:6px;">Ensemble pour les plus vulnérables</div>
+    <div style="color:rgba(255,255,255,0.75);font-size:12px;margin-bottom:20px;">Association AHBAB — Dakar, Sénégal 🇸🇳</div>
+    <div style="display:flex;justify-content:center;gap:24px;margin-bottom:22px;">
+      <div style="text-align:center;"><div style="color:#fff;font-size:18px;font-weight:bold;">13 790 000 F</div><div style="color:rgba(255,255,255,0.65);font-size:10px;margin-top:2px;">Collectés</div></div>
+      <div style="text-align:center;"><div style="color:#fff;font-size:18px;font-weight:bold;">291+</div><div style="color:rgba(255,255,255,0.65);font-size:10px;margin-top:2px;">Donateurs</div></div>
+      <div style="text-align:center;"><div style="color:#fff;font-size:18px;font-weight:bold;">6</div><div style="color:rgba(255,255,255,0.65);font-size:10px;margin-top:2px;">Causes</div></div>
+    </div>
+    <button onclick="showModal()" class="pulse" style="background:#fff;border:none;border-radius:30px;padding:13px 32px;color:#1a7a3a;font-size:14px;font-weight:bold;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.2);font-family:Georgia,serif;">🤲 Faire un don maintenant</button>
+  </div>
+
+  <!-- MOYENS PAIEMENT -->
+  <div style="background:#fff;padding:16px 20px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+    <div style="color:#333;font-size:13px;font-weight:bold;margin-bottom:12px;text-align:center;">💳 Moyens de paiement disponibles</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="https://pay.wave.com/m/M_OfXi7Xp9QZQZ/c/sn" target="_blank" style="background:#e8f5e9;border:2px solid #4CAF50;border-radius:12px;padding:12px 8px;text-align:center;text-decoration:none;display:flex;align-items:center;gap:8px;justify-content:center;"><span style="font-size:20px;">📱</span><span style="color:#4CAF50;font-size:12px;font-weight:bold;">Wave</span></a>
+      <a href="tel:*144*2*774445336#" style="background:#fff3e0;border:2px solid #FF6600;border-radius:12px;padding:12px 8px;text-align:center;text-decoration:none;display:flex;align-items:center;gap:8px;justify-content:center;"><span style="font-size:20px;">🟠</span><span style="color:#FF6600;font-size:12px;font-weight:bold;">Orange Money</span></a>
+      <a href="#" onclick="showModal()" style="background:#e3f2fd;border:2px solid #1565c0;border-radius:12px;padding:12px 8px;text-align:center;text-decoration:none;display:flex;align-items:center;gap:8px;justify-content:center;"><span style="font-size:20px;">💳</span><span style="color:#1565c0;font-size:12px;font-weight:bold;">Carte Bancaire</span></a>
+      <a href="https://paypal.me/ahbabelhadj" target="_blank" style="background:#e8eaf6;border:2px solid #003087;border-radius:12px;padding:12px 8px;text-align:center;text-decoration:none;display:flex;align-items:center;gap:8px;justify-content:center;"><span style="font-size:20px;">🌍</span><span style="color:#003087;font-size:12px;font-weight:bold;">PayPal</span></a>
+    </div>
+  </div>
+
+  <!-- DERNIERS DONS -->
+  <div style="background:#fff;padding:16px 20px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <div style="color:#333;font-size:13px;font-weight:bold;">❤️ Derniers dons</div>
+      <div style="background:#e8f5e9;border-radius:10px;padding:3px 8px;color:#1a7a3a;font-size:10px;font-weight:bold;">EN DIRECT</div>
+    </div>
+    <div id="dons-list"></div>
+  </div>
+
+  <!-- CAUSES PREVIEW -->
+  <div style="padding:0 16px;">
+    <div style="color:#333;font-size:14px;font-weight:bold;margin-bottom:12px;">🌟 Nos Causes</div>
+    <div id="causes-preview"></div>
+    <button onclick="showPage('dons')" style="width:100%;background:none;border:2px solid #1a7a3a;border-radius:14px;padding:13px;color:#1a7a3a;font-size:13px;font-weight:bold;cursor:pointer;margin-bottom:16px;font-family:Georgia,serif;">Voir toutes les causes →</button>
+  </div>
+
+  <!-- CALENDRIER PREVIEW -->
+  <div style="background:#fff;padding:16px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+    <div style="color:#333;font-size:13px;font-weight:bold;margin-bottom:12px;">📅 Événements Prophétiques</div>
+    <div id="events-preview"></div>
+  </div>
+</div>
+
+<!-- PAGE DONS -->
+<div id="pg-dons" class="page">
+  <div style="padding:16px;">
+    <div style="color:#333;font-size:16px;font-weight:bold;margin-bottom:4px;">🌟 Toutes les Causes</div>
+    <div style="color:#888;font-size:11px;margin-bottom:14px;">Chaque don compte — Jazakallahu Khayran 🤲</div>
+    <div id="causes-all"></div>
+  </div>
+</div>
+
+<!-- PAGE CALENDRIER -->
+<div id="pg-calendrier" class="page">
+  <div style="background:linear-gradient(135deg,#1a7a3a,#0d4a22);padding:16px 20px 20px;text-align:center;">
+    <div style="color:#fff;font-size:16px;font-weight:bold;">📅 Calendrier Prophétique 2026</div>
+    <div style="color:rgba(255,255,255,0.7);font-size:11px;margin-top:4px;">Vie et événements du Prophète Muhammad ﷺ</div>
+    <div style="color:#c9a84c;font-size:15px;font-family:serif;margin-top:8px;">اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ</div>
+  </div>
+  <div style="padding:16px;">
+    <div style="background:#e8f5e9;border-radius:14px;padding:12px;margin-bottom:14px;text-align:center;">
+      <div style="color:#1a7a3a;font-size:12px;font-weight:bold;">🌟 Ces jours sont des opportunités de rapprochement d'Allah ﷻ</div>
+      <div style="color:#555;font-size:10px;margin-top:3px;">Augmentez vos prières, invocations et dons ces jours bénis</div>
+    </div>
+    <div id="events-all"></div>
+  </div>
+</div>
+
+<!-- PAGE MEMBRES -->
+<div id="pg-membres" class="page">
+  <div id="membre-login" style="padding:24px 20px;">
+    <div style="text-align:center;margin-bottom:24px;">
+      <div style="width:70px;height:70px;border-radius:35px;background:linear-gradient(135deg,#1a7a3a,#27ae60);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 12px;">👥</div>
+      <div style="color:#222;font-size:18px;font-weight:bold;">Espace Membres AHBAB</div>
+      <div style="color:#888;font-size:11px;margin-top:3px;">Rejoignez la famille — Soyez récompensé !</div>
+    </div>
+    <div style="color:#888;font-size:11px;margin-bottom:6px;">Prénom *</div>
+    <input type="text" id="m-prenom" class="input" placeholder="Moussa"/>
+    <div style="color:#888;font-size:11px;margin-bottom:6px;">📱 Téléphone *</div>
+    <input type="tel" id="m-phone" class="input" placeholder="77 123 45 67"/>
+    <button onclick="inscrireMembre()" style="width:100%;background:linear-gradient(135deg,#1a7a3a,#27ae60);border:none;border-radius:14px;padding:15px;color:#fff;font-size:14px;font-weight:bold;cursor:pointer;font-family:Georgia,serif;">✅ Rejoindre AHBAB</button>
+    <div style="text-align:center;margin-top:16px;color:#bbb;font-size:10px;">Association AHBAB Elhadji Malick Seye — Dakar 🇸🇳</div>
+  </div>
+  <div id="membre-profil" style="display:none;padding-bottom:80px;">
+    <div style="background:linear-gradient(135deg,#1a7a3a,#0d4a22);padding:24px 20px;text-align:center;">
+      <div style="width:70px;height:70px;border-radius:35px;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 12px;border:3px solid rgba(255,255,255,0.4);">👤</div>
+      <div id="m-name" style="color:#fff;font-size:20px;font-weight:bold;"></div>
+      <div style="background:rgba(255,255,255,0.15);border-radius:20px;padding:4px 14px;display:inline-block;margin-top:8px;color:#fff;font-size:12px;">🌱 Bienfaiteur</div>
+    </div>
+    <div style="padding:16px;">
+      <div style="background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+        <div style="color:#999;font-size:10px;margin-bottom:10px;letter-spacing:1px;">MA CARTE DE MEMBRE</div>
+        <div id="m-details"></div>
+      </div>
+      <button onclick="deconnecterMembre()" style="width:100%;background:none;border:1px solid #ddd;border-radius:14px;padding:13px;color:#999;font-size:12px;cursor:pointer;font-family:Georgia,serif;">Se déconnecter</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE TRANSPARENCE -->
+<div id="pg-transparence" class="page">
+  <div style="background:linear-gradient(135deg,#1a7a3a,#0d4a22);padding:16px 20px 20px;text-align:center;">
+    <div style="color:#fff;font-size:16px;font-weight:bold;">🔍 Rapport de Transparence</div>
+    <div style="color:rgba(255,255,255,0.7);font-size:11px;margin-top:3px;">Chaque don est tracé et utilisé avec intégrité</div>
+  </div>
+  <div style="padding:16px;">
+    <div id="rapport"></div>
+    <div style="background:#e8f5e9;border-radius:14px;padding:16px;text-align:center;">
+      <div style="color:#1a7a3a;font-size:14px;font-weight:bold;margin-bottom:4px;">📊 Total collecté</div>
+      <div style="color:#222;font-size:24px;font-weight:bold;">13 790 000 FCFA</div>
+      <div style="color:#888;font-size:10px;margin-top:3px;">Géré avec intégrité — Association AHBAB</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- fin wrapper -->
+
+<!-- MODAL DON -->
+<div id="modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:200;align-items:flex-end;justify-content:center;">
+  <div style="background:#fff;border-radius:22px 22px 0 0;width:100%;max-width:480px;padding:22px;max-height:88vh;overflow-y:auto;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <div style="color:#222;font-size:15px;font-weight:bold;" id="modal-titre">🤲 Faire un don</div>
+      <button onclick="hideModal()" style="background:#f5f5f5;border:none;border-radius:20px;width:30px;height:30px;cursor:pointer;font-size:16px;">×</button>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;" id="montants-grid"></div>
+    <input type="number" id="montant-input" class="input" placeholder="Autre montant en FCFA..." style="margin-bottom:10px;"/>
+    <input type="text" id="nom-input" class="input" placeholder="Votre prénom (optionnel)"/>
+    <div style="color:#999;font-size:11px;text-align:center;margin-bottom:12px;">Choisissez votre moyen de paiement</div>
+    <a href="https://pay.wave.com/m/M_OfXi7Xp9QZQZ/c/sn" target="_blank" class="moyen" style="background:#e8f5e9;border-color:#4CAF50;">
+      <span style="font-size:22px;">📱</span>
+      <div style="flex:1;"><div style="color:#4CAF50;font-size:13px;font-weight:bold;">Payer via Wave</div></div>
+      <span style="color:#4CAF50;font-size:16px;">→</span>
+    </a>
+    <a href="tel:*144*2*774445336#" class="moyen" style="background:#fff3e0;border-color:#FF6600;">
+      <span style="font-size:22px;">🟠</span>
+      <div style="flex:1;"><div style="color:#FF6600;font-size:13px;font-weight:bold;">Payer via Orange Money</div></div>
+      <span style="color:#FF6600;font-size:16px;">→</span>
+    </a>
+    <a href="#" class="moyen" style="background:#e3f2fd;border-color:#1565c0;">
+      <span style="font-size:22px;">💳</span>
+      <div style="flex:1;"><div style="color:#1565c0;font-size:13px;font-weight:bold;">Payer par Carte Bancaire</div></div>
+      <span style="color:#1565c0;font-size:16px;">→</span>
+    </a>
+    <a href="https://paypal.me/ahbabelhadj" target="_blank" class="moyen" style="background:#e8eaf6;border-color:#003087;">
+      <span style="font-size:22px;">🌍</span>
+      <div style="flex:1;"><div style="color:#003087;font-size:13px;font-weight:bold;">PayPal — International</div></div>
+      <span style="color:#003087;font-size:16px;">→</span>
+    </a>
+    <div style="text-align:center;margin-top:14px;color:#bbb;font-size:10px;">🔒 Sécurisé • Association AHBAB Elhadji Malick Seye</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid #e8e8e8;display:flex;justify-content:space-around;padding:10px 0 20px;z-index:100;box-shadow:0 -4px 20px rgba(0,0,0,0.08);">
+  <button onclick="showPage('accueil')" id="nav-accueil" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:0 6px;"><span style="font-size:22px;">🏠</span><span style="font-size:9px;color:#1a7a3a;font-weight:bold;">Accueil</span></button>
+  <button onclick="showPage('dons')" id="nav-dons" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:0 6px;"><span style="font-size:22px;">🤲</span><span style="font-size:9px;color:#bbb;">Dons</span></button>
+  <button onclick="showPage('calendrier')" id="nav-calendrier" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:0 6px;"><span style="font-size:22px;">📅</span><span style="font-size:9px;color:#bbb;">Calendrier</span></button>
+  <button onclick="showPage('membres')" id="nav-membres" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:0 6px;"><span style="font-size:22px;">👥</span><span style="font-size:9px;color:#bbb;">Membres</span></button>
+  <button onclick="showPage('transparence')" id="nav-transparence" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:0 6px;"><span style="font-size:22px;">🔍</span><span style="font-size:9px;color:#bbb;">Rapport</span></button>
+</div>
+
+<script>
 const CAUSES=[
-{id:1,titre:"Soutien aux Orphelins",emoji:"🧒",desc:"Offrez un avenir à des enfants sans parents",objectif:5000000,collecte:2340000,donateurs:47,color:"#1a7a3a"},
-{id:2,titre:"Aide aux Malades",emoji:"🏥",desc:"Soins médicaux pour ceux qui n'ont pas les moyens",objectif:3000000,collecte:1200000,donateurs:31,color:"#1565c0"},
-{id:3,titre:"Les Talibés",emoji:"📚",desc:"Nourriture et soutien aux jeunes talibés",objectif:2000000,collecte:890000,donateurs:28,color:"#e65100"},
-{id:4,titre:"Familles Démunies",emoji:"🏠",desc:"Aide urgente pour familles en difficulté",objectif:4000000,collecte:1650000,donateurs:39,color:"#6a1b9a"},
-{id:5,titre:"Zakat Al-Mal",emoji:"💰",desc:"Versez votre Zakat — certificat officiel",objectif:10000000,collecte:4500000,donateurs:82,color:"#1a7a3a"},
-{id:6,titre:"Sadaqa Jariya",emoji:"🕌",desc:"Mosquée, puits, Coran — récompense éternelle",objectif:8000000,collecte:3200000,donateurs:64,color:"#1a7a3a"},
+{titre:"Soutien aux Orphelins",emoji:"🧒",desc:"Offrez un avenir à des enfants sans parents",objectif:5000000,collecte:2340000,donateurs:47,color:"#1a7a3a"},
+{titre:"Aide aux Malades",emoji:"🏥",desc:"Soins médicaux pour ceux qui n'ont pas les moyens",objectif:3000000,collecte:1200000,donateurs:31,color:"#1565c0"},
+{titre:"Les Talibés",emoji:"📚",desc:"Nourriture et soutien aux jeunes talibés",objectif:2000000,collecte:890000,donateurs:28,color:"#e65100"},
+{titre:"Familles Démunies",emoji:"🏠",desc:"Aide urgente pour familles en difficulté",objectif:4000000,collecte:1650000,donateurs:39,color:"#6a1b9a"},
+{titre:"Zakat Al-Mal",emoji:"💰",desc:"Versez votre Zakat — certificat officiel",objectif:10000000,collecte:4500000,donateurs:82,color:"#1a7a3a"},
+{titre:"Sadaqa Jariya",emoji:"🕌",desc:"Mosquée, puits, Coran — récompense éternelle",objectif:8000000,collecte:3200000,donateurs:64,color:"#1a7a3a"},
 ];
-
+const DONS=[
+{nom:"Moussa D.",montant:50000,cause:"Orphelins",date:"Il y a 2h",pays:"🇸🇳"},
+{nom:"Fatima K.",montant:25000,cause:"Zakat",date:"Il y a 3h",pays:"🇫🇷"},
+{nom:"Ibrahim S.",montant:100000,cause:"Sadaqa Jariya",date:"Il y a 5h",pays:"🇸🇳"},
+{nom:"Aïcha M.",montant:75000,cause:"Malades",date:"Il y a 6h",pays:"🇧🇪"},
+{nom:"Omar B.",montant:30000,cause:"Talibés",date:"Il y a 8h",pays:"🇸🇳"},
+];
 const EVENTS=[
 {mois:"FÉV",jour:"26",titre:"1er Ramadan du Prophète ﷺ",detail:"Le Prophète ﷺ observa le premier jeûne du Ramadan en l'an 2 AH avec 305 Sahaba. Une nuit de larmes et de prières intenses avant la bataille de Badr.",badge:"305 Sahaba",icon:"🌙"},
 {mois:"MAR",jour:"5",titre:"Jour de l'Éléphant — Naissance du Prophète ﷺ",detail:"Naissance de Muhammad ﷺ en 570 AD. Allah détruisit l'armée d'Abraha pour protéger la Kaaba. Le meilleur des êtres vit le jour.",badge:"570 AD",icon:"🌹"},
@@ -48,236 +244,143 @@ const EVENTS=[
 {mois:"JUN",jour:"15",titre:"Bataille de Khaybar",detail:"Victoire des musulmans en l'an 7 AH. Ali ibn Abi Talib ؓ porta l'étendard. Grande démonstration de la foi et du courage.",badge:"An 7 AH",icon:"⚔️"},
 ];
 
-const DONS=[
-{nom:"Moussa D.",montant:50000,cause:"Orphelins",date:"Il y a 2h",pays:"🇸🇳"},
-{nom:"Fatima K.",montant:25000,cause:"Zakat",date:"Il y a 3h",pays:"🇫🇷"},
-{nom:"Ibrahim S.",montant:100000,cause:"Sadaqa Jariya",date:"Il y a 5h",pays:"🇸🇳"},
-{nom:"Aïcha M.",montant:75000,cause:"Malades",date:"Il y a 6h",pays:"🇧🇪"},
-{nom:"Omar B.",montant:30000,cause:"Talibés",date:"Il y a 8h",pays:"🇸🇳"},
-];
+const fmt=n=>(Number(n)||0).toLocaleString("fr-FR");
 
-const MOYENS=[
-{label:"Wave",icon:"📱",color:"#4CAF50",bg:"#e8f5e9",href:"https://pay.wave.com/m/M_OfXi7Xp9QZQZ/c/sn"},
-{label:"Orange Money",icon:"🟠",color:"#FF6600",bg:"#fff3e0",href:"tel:*144*2*774445336#"},
-{label:"Carte Bancaire",icon:"💳",color:"#1565c0",bg:"#e3f2fd",href:"#carte"},
-{label:"PayPal International",icon:"🌍",color:"#003087",bg:"#e8eaf6",href:"https://paypal.me/ahbabelhadj"},
-];
-
-function App(){
-const [page,setPage]=useState("accueil");
-const [modal,setModal]=useState(null);
-const [membre,setMembre]=useState(null);
-return React.createElement("div",{style:{maxWidth:480,margin:"0 auto",minHeight:"100vh",background:BG,position:"relative"}},
-modal&&React.createElement(Modal,{cause:modal,onClose:()=>setModal(null)}),
-React.createElement(Header),
-page==="accueil"&&React.createElement(Accueil,{setPage,setModal}),
-page==="dons"&&React.createElement(Dons,{setModal}),
-page==="calendrier"&&React.createElement(Calendrier),
-page==="membres"&&React.createElement(Membres,{membre,setMembre}),
-page==="transparence"&&React.createElement(Transparence),
-React.createElement(Nav,{page,setPage}));}
-
-function Header(){
-return React.createElement("div",{style:{background:"linear-gradient(135deg,#1a7a3a,#0d4a22)",padding:"44px 20px 14px",position:"sticky",top:0,zIndex:50,boxShadow:"0 2px 20px rgba(0,0,0,0.2)"}},
-React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center"}},
-React.createElement("div",{style:{display:"flex",alignItems:"center",gap:10}},
-React.createElement("div",{style:{width:40,height:40,borderRadius:20,background:"rgba(255,255,255,0.15)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,border:"2px solid rgba(255,255,255,0.3)"}},"🤲"),
-React.createElement("div",null,
-React.createElement("div",{style:{color:W,fontSize:17,fontWeight:"bold",letterSpacing:1}},"AHBAB"),
-React.createElement("div",{style:{color:"rgba(255,255,255,0.65)",fontSize:10}},"Elhadji Malick Seye"))),
-React.createElement("div",{style:{background:"rgba(255,255,255,0.15)",borderRadius:20,padding:"5px 12px",display:"flex",alignItems:"center",gap:6}},
-React.createElement("div",{style:{width:7,height:7,borderRadius:4,background:GL}}),
-React.createElement("div",{style:{color:W,fontSize:10}},"En ligne"))));}
-
-function Accueil({setPage,setModal}){
-const total=CAUSES.reduce((s,c)=>s+c.collecte,0);
-const dons=CAUSES.reduce((s,c)=>s+c.donateurs,0);
-return React.createElement("div",{className:"fade",style:{paddingBottom:80}},
-React.createElement("div",{style:{background:"linear-gradient(160deg,#1a7a3a,#0d4a22)",padding:"20px 20px 28px",textAlign:"center"}},
-React.createElement("div",{style:{color:"rgba(255,255,255,0.8)",fontSize:14,fontFamily:"serif",marginBottom:8}},"بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ"),
-React.createElement("div",{style:{color:W,fontSize:20,fontWeight:"bold",lineHeight:1.4,marginBottom:6}},"Ensemble pour les plus vulnérables"),
-React.createElement("div",{style:{color:"rgba(255,255,255,0.75)",fontSize:12,marginBottom:20}},"Association AHBAB — Dakar, Sénégal 🇸🇳"),
-React.createElement("div",{style:{display:"flex",justifyContent:"center",gap:24,marginBottom:22}},
-[{n:fmt(total)+" F",l:"Collectés"},{n:dons+"+",l:"Donateurs"},{n:CAUSES.length+"",l:"Causes"}].map((s,i)=>
-React.createElement("div",{key:i,style:{textAlign:"center"}},
-React.createElement("div",{style:{color:W,fontSize:18,fontWeight:"bold"}},s.n),
-React.createElement("div",{style:{color:"rgba(255,255,255,0.65)",fontSize:10,marginTop:2}},s.l)))),
-React.createElement("button",{onClick:()=>setModal(null),className:"pulse",style:{background:W,border:"none",borderRadius:30,padding:"13px 32px",color:G,fontSize:14,fontWeight:"bold",cursor:"pointer",boxShadow:"0 4px 20px rgba(0,0,0,0.2)"}},"🤲 Faire un don maintenant")),
-React.createElement("div",{style:{background:W,padding:"16px 20px",marginBottom:12,boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}},
-React.createElement("div",{style:{color:"#333",fontSize:13,fontWeight:"bold",marginBottom:12,textAlign:"center"}},"💳 Moyens de paiement disponibles"),
-React.createElement("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}},
-MOYENS.map((m,i)=>
-React.createElement("a",{key:i,href:m.href,target:"_blank",style:{background:m.bg,border:"2px solid "+m.color,borderRadius:12,padding:"12px 8px",textAlign:"center",textDecoration:"none",display:"flex",alignItems:"center",gap:8,justifyContent:"center"}},
-React.createElement("div",{style:{fontSize:20}},m.icon),
-React.createElement("div",{style:{color:m.color,fontSize:12,fontWeight:"bold"}},m.label))))),
-React.createElement("div",{style:{background:W,padding:"16px 20px",marginBottom:12,boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}},
-React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}},
-React.createElement("div",{style:{color:"#333",fontSize:13,fontWeight:"bold"}},"❤️ Derniers dons"),
-React.createElement("div",{style:{background:"#e8f5e9",borderRadius:10,padding:"3px 8px",color:G,fontSize:10,fontWeight:"bold"}},"EN DIRECT")),
-DONS.map((d,i)=>
-React.createElement("div",{key:i,style:{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"9px 0",borderBottom:i<DONS.length-1?"1px solid #f5f5f5":"none"}},
-React.createElement("div",{style:{display:"flex",alignItems:"center",gap:10}},
-React.createElement("div",{style:{width:34,height:34,borderRadius:17,background:"linear-gradient(135deg,#1a7a3a,#27ae60)",display:"flex",alignItems:"center",justifyContent:"center",color:W,fontSize:13,fontWeight:"bold"}},d.nom[0]),
-React.createElement("div",null,
-React.createElement("div",{style:{color:"#333",fontSize:12,fontWeight:"bold"}},d.nom+" "+d.pays),
-React.createElement("div",{style:{color:"#999",fontSize:10}},d.cause+" • "+d.date))),
-React.createElement("div",{style:{color:G,fontSize:12,fontWeight:"bold"}},fmt(d.montant)+" F")))),
-React.createElement("div",{style:{padding:"0 16px"}},
-React.createElement("div",{style:{color:"#333",fontSize:14,fontWeight:"bold",marginBottom:12}},"🌟 Nos Causes"),
-CAUSES.slice(0,3).map((c,i)=>React.createElement(Carte,{key:i,cause:c,setModal})),
-React.createElement("button",{onClick:()=>setPage("dons"),style:{width:"100%",background:"none",border:"2px solid "+G,borderRadius:14,padding:13,color:G,fontSize:13,fontWeight:"bold",cursor:"pointer",marginBottom:16}},"Voir toutes les causes →")),
-React.createElement("div",{style:{background:W,padding:"16px 20px",boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}},
-React.createElement("div",{style:{color:"#333",fontSize:13,fontWeight:"bold",marginBottom:12}},"📅 Événements Prophétiques"),
-EVENTS.slice(0,3).map((e,i)=>
-React.createElement("div",{key:i,style:{display:"flex",gap:10,padding:"9px 0",borderBottom:i<2?"1px solid #f5f5f5":"none"}},
-React.createElement("div",{style:{minWidth:44,textAlign:"center",background:"#e8f5e9",borderRadius:10,padding:"5px 4px",flexShrink:0}},
-React.createElement("div",{style:{color:G,fontSize:9,fontWeight:"bold"}},e.mois),
-React.createElement("div",{style:{color:G,fontSize:20,fontWeight:"bold",lineHeight:1}},e.jour)),
-React.createElement("div",null,
-React.createElement("div",{style:{color:"#222",fontSize:12,fontWeight:"bold"}},e.icon+" "+e.titre),
-React.createElement("div",{style:{color:"#888",fontSize:10,marginTop:2,lineHeight:1.5}},e.detail.substring(0,65)+"...")))))
-);}
-
-function Carte({cause,setModal}){
-const pct=Math.round((cause.collecte/cause.objectif)*100);
-return React.createElement("div",{style:{background:W,borderRadius:16,padding:16,marginBottom:12,boxShadow:"0 2px 10px rgba(0,0,0,0.06)"}},
-React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:8}},
-React.createElement("span",{style:{fontSize:24}},cause.emoji),
-React.createElement("span",{style:{background:"#e8f5e9",borderRadius:10,padding:"2px 8px",color:G,fontSize:10,fontWeight:"bold"}},pct+"% atteint"),
-React.createElement("div",{style:{flex:1}}),
-React.createElement("div",{style:{color:"#888",fontSize:10}},cause.donateurs+" donateurs")),
-React.createElement("div",{style:{color:"#222",fontSize:14,fontWeight:"bold",marginBottom:4}},cause.titre),
-React.createElement("div",{style:{color:"#888",fontSize:11,marginBottom:10}},cause.desc),
-React.createElement("div",{style:{background:"#f0f0f0",borderRadius:99,height:8,overflow:"hidden",marginBottom:8}},
-React.createElement("div",{style:{width:pct+"%",height:"100%",background:"linear-gradient(90deg,"+cause.color+","+GL+")",borderRadius:99}})),
-React.createElement("div",{style:{display:"flex",justifyContent:"space-between",marginBottom:12}},
-React.createElement("div",{style:{color:G,fontSize:13,fontWeight:"bold"}},fmt(cause.collecte)+" F"),
-React.createElement("div",{style:{color:"#aaa",fontSize:10}},"sur "+fmt(cause.objectif)+" F")),
-React.createElement("button",{onClick:()=>setModal(cause),style:{width:"100%",background:"linear-gradient(135deg,#1a7a3a,#27ae60)",border:"none",borderRadius:12,padding:12,color:W,fontSize:13,fontWeight:"bold",cursor:"pointer"}},"🤲 Faire un don"));}
-
-function Modal({cause,onClose}){
-const [montant,setMontant]=useState("");
-const [nom,setNom]=useState("");
-return React.createElement("div",{style:{position:"fixed",inset:0,background:"rgba(0,0,0,0.65)",zIndex:200,display:"flex",alignItems:"flex-end",justifyContent:"center"}},
-React.createElement("div",{style:{background:W,borderRadius:"22px 22px 0 0",width:"100%",maxWidth:480,padding:22,maxHeight:"88vh",overflowY:"auto"}},
-React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16}},
-React.createElement("div",{style:{color:"#222",fontSize:15,fontWeight:"bold"}},"🤲 Faire un don"+(cause?" — "+cause.titre:"")),
-React.createElement("button",{onClick:onClose,style:{background:"#f5f5f5",border:"none",borderRadius:20,width:30,height:30,cursor:"pointer",fontSize:16}},"×")),
-React.createElement("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:8,marginBottom:12}},
-[5000,10000,25000,50000,100000,200000].map((m,i)=>
-React.createElement("button",{key:i,onClick:()=>setMontant(String(m)),style:{background:montant===String(m)?"#e8f5e9":"#f8f8f8",border:"1px solid "+(montant===String(m)?G:"#e0e0e0"),borderRadius:10,padding:"10px 4px",color:montant===String(m)?G:"#333",fontSize:11,fontWeight:"bold",cursor:"pointer"}},fmt(m)+" F"))),
-React.createElement("input",{type:"number",value:montant,onChange:e=>setMontant(e.target.value),placeholder:"Autre montant en FCFA...",style:{width:"100%",border:"1px solid #e0e0e0",borderRadius:12,padding:"12px 14px",fontSize:13,outline:"none",marginBottom:10,boxSizing:"border-box"}}),
-React.createElement("input",{type:"text",value:nom,onChange:e=>setNom(e.target.value),placeholder:"Votre prénom (optionnel)",style:{width:"100%",border:"1px solid #e0e0e0",borderRadius:12,padding:"12px 14px",fontSize:13,outline:"none",marginBottom:16,boxSizing:"border-box"}}),
-React.createElement("div",{style:{color:"#999",fontSize:11,textAlign:"center",marginBottom:12}},"Choisissez votre moyen de paiement"),
-React.createElement("div",{style:{display:"flex",flexDirection:"column",gap:10}},
-MOYENS.map((m,i)=>
-React.createElement("a",{key:i,href:m.href,target:"_blank",style:{background:m.bg,border:"2px solid "+m.color,borderRadius:14,padding:"13px 16px",display:"flex",alignItems:"center",gap:12,textDecoration:"none"}},
-React.createElement("div",{style:{fontSize:22}},m.icon),
-React.createElement("div",{style:{flex:1}},
-React.createElement("div",{style:{color:m.color,fontSize:13,fontWeight:"bold"}},m.label),
-montant&&React.createElement("div",{style:{color:"#888",fontSize:10,marginTop:1}},"Montant: "+fmt(Number(montant))+" FCFA")),
-React.createElement("div",{style:{color:m.color,fontSize:16}},"→")))),
-React.createElement("div",{style:{textAlign:"center",marginTop:14,color:"#bbb",fontSize:10}},"🔒 Sécurisé • Association AHBAB Elhadji Malick Seye")));}
-
-function Dons({setModal}){
-return React.createElement("div",{className:"fade",style:{padding:"16px 16px 80px"}},
-React.createElement("div",{style:{color:"#333",fontSize:16,fontWeight:"bold",marginBottom:4}},"🌟 Toutes les Causes"),
-React.createElement("div",{style:{color:"#888",fontSize:11,marginBottom:14}},"Chaque don compte — Jazakallahu Khayran 🤲"),
-CAUSES.map((c,i)=>React.createElement(Carte,{key:i,cause:c,setModal})));}
-
-function Calendrier(){
-const [sel,setSel]=useState(null);
-return React.createElement("div",{className:"fade",style:{paddingBottom:80}},
-React.createElement("div",{style:{background:"linear-gradient(135deg,#1a7a3a,#0d4a22)",padding:"16px 20px 20px",textAlign:"center"}},
-React.createElement("div",{style:{color:W,fontSize:16,fontWeight:"bold"}},"📅 Calendrier Prophétique 2026"),
-React.createElement("div",{style:{color:"rgba(255,255,255,0.7)",fontSize:11,marginTop:4}},"Vie et événements du Prophète Muhammad ﷺ"),
-React.createElement("div",{style:{color:GOLD,fontSize:15,fontFamily:"serif",marginTop:8}},"اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ")),
-React.createElement("div",{style:{padding:16}},
-React.createElement("div",{style:{background:"#e8f5e9",borderRadius:14,padding:12,marginBottom:14,textAlign:"center"}},
-React.createElement("div",{style:{color:G,fontSize:12,fontWeight:"bold"}},"🌟 Ces jours sont des opportunités de rapprochement d'Allah ﷻ"),
-React.createElement("div",{style:{color:"#555",fontSize:10,marginTop:3}},"Augmentez vos prières, invocations et dons ces jours bénis")),
-EVENTS.map((e,i)=>
-React.createElement("div",{key:i,onClick:()=>setSel(sel===i?null:i),style:{background:W,borderRadius:16,padding:14,marginBottom:10,cursor:"pointer",boxShadow:"0 2px 8px rgba(0,0,0,0.05)",border:"1px solid "+(sel===i?"#1a7a3a":"#f0f0f0")}},
-React.createElement("div",{style:{display:"flex",gap:10,alignItems:"flex-start"}},
-React.createElement("div",{style:{minWidth:46,textAlign:"center",background:"#e8f5e9",borderRadius:10,padding:"6px 4px",flexShrink:0}},
-React.createElement("div",{style:{color:G,fontSize:9,fontWeight:"bold",letterSpacing:1}},e.mois),
-React.createElement("div",{style:{color:G,fontSize:22,fontWeight:"bold",lineHeight:1}},e.jour)),
-React.createElement("div",{style:{flex:1}},
-React.createElement("div",{style:{color:"#222",fontSize:13,fontWeight:"bold"}},e.icon+" "+e.titre),
-React.createElement("div",{style:{background:"#f0f9f0",borderRadius:8,padding:"2px 7px",color:G,fontSize:9,fontWeight:"bold",display:"inline-block",marginTop:3}},e.badge),
-sel===i&&React.createElement("div",{style:{color:"#555",fontSize:11,marginTop:8,lineHeight:1.7,borderTop:"1px solid #f0f0f0",paddingTop:8}},
-e.detail,
-React.createElement("div",{style:{background:"#e8f5e9",borderRadius:10,padding:"8px 10px",marginTop:8,color:G,fontSize:11,fontWeight:"bold"}},"🤲 Augmentez vos prières et dons ce jour béni !"))),
-React.createElement("div",{style:{color:"#ddd",fontSize:12,flexShrink:0}},sel===i?"▲":"▼")))));}
-
-function Membres({membre,setMembre}){
-const [prenom,setPrenom]=useState("");
-const [phone,setPhone]=useState("");
-const [loading,setLoading]=useState(false);
-const NIVEAUX=[{min:0,label:"Bienfaiteur",icon:"🌱"},{min:100000,label:"Mécène",icon:"⭐"},{min:500000,label:"Wali",icon:"🌟"},{min:1000000,label:"Grand Mécène",icon:"👑"}];
-const niv=membre?NIVEAUX.filter(n=>(membre.totalDons||0)>=n.min).pop()||NIVEAUX[0]:NIVEAUX[0];
-const inscrire=()=>{
-if(!prenom||!phone)return;
-setLoading(true);
-setTimeout(()=>{setMembre({prenom,phone,totalDons:0,depuis:"2026",id:"AHBAB-"+Math.floor(Math.random()*9000+1000)});setLoading(false);},1000);};
-if(membre)return React.createElement("div",{className:"fade",style:{paddingBottom:80}},
-React.createElement("div",{style:{background:"linear-gradient(135deg,#1a7a3a,#0d4a22)",padding:"24px 20px",textAlign:"center"}},
-React.createElement("div",{style:{width:70,height:70,borderRadius:35,background:"rgba(255,255,255,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:32,margin:"0 auto 12px",border:"3px solid rgba(255,255,255,0.4)"}},"👤"),
-React.createElement("div",{style:{color:W,fontSize:20,fontWeight:"bold"}},membre.prenom),
-React.createElement("div",{style:{background:"rgba(255,255,255,0.15)",borderRadius:20,padding:"4px 14px",display:"inline-block",marginTop:8,color:W,fontSize:12}},niv.icon+" "+niv.label)),
-React.createElement("div",{style:{padding:16}},
-React.createElement("div",{style:{background:W,borderRadius:16,padding:16,marginBottom:12,boxShadow:"0 2px 8px rgba(0,0,0,0.06)"}},
-React.createElement("div",{style:{color:"#999",fontSize:10,marginBottom:10,letterSpacing:1}},"MA CARTE DE MEMBRE"),
-[["📱","Téléphone",membre.phone],["🆔","N° Membre",membre.id],["📅","Depuis",membre.depuis],["💰","Total dons",fmt(membre.totalDons)+" FCFA"]].map(([ico,label,val])=>
-React.createElement("div",{key:label,style:{display:"flex",justifyContent:"space-between",padding:"9px 0",borderBottom:"1px solid #f5f5f5"}},
-React.createElement("div",{style:{color:"#999",fontSize:11}},ico+" "+label),
-React.createElement("div",{style:{color:"#333",fontSize:11,fontWeight:"bold"}},val)))),
-React.createElement("button",{onClick:()=>setMembre(null),style:{width:"100%",background:"none",border:"1px solid #ddd",borderRadius:14,padding:13,color:"#999",fontSize:12,cursor:"pointer"}},"Se déconnecter")));
-return React.createElement("div",{className:"fade",style:{padding:"24px 20px 80px"}},
-React.createElement("div",{style:{textAlign:"center",marginBottom:24}},
-React.createElement("div",{style:{width:70,height:70,borderRadius:35,background:"linear-gradient(135deg,#1a7a3a,#27ae60)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:32,margin:"0 auto 12px"}},"👥"),
-React.createElement("div",{style:{color:"#222",fontSize:18,fontWeight:"bold"}},"Espace Membres AHBAB"),
-React.createElement("div",{style:{color:"#888",fontSize:11,marginTop:3}},"Rejoignez la famille — Soyez récompensé !")),
-[["Prénom *",prenom,setPrenom,"text","Moussa"],["📱 Téléphone *",phone,setPhone,"tel","77 123 45 67"]].map(([label,val,setter,type,ph])=>
-React.createElement("div",{key:label,style:{marginBottom:12}},
-React.createElement("div",{style:{color:"#888",fontSize:11,marginBottom:6}},label),
-React.createElement("input",{type,value:val,onChange:e=>setter(e.target.value),placeholder:ph,style:{width:"100%",background:"#f8f8f8",border:"1px solid "+(val?"#1a7a3a":"#e0e0e0"),borderRadius:12,padding:"13px 14px",fontSize:13,outline:"none",boxSizing:"border-box"}}))),
-React.createElement("button",{onClick:inscrire,disabled:loading||!prenom||!phone,style:{width:"100%",background:prenom&&phone?"linear-gradient(135deg,#1a7a3a,#27ae60)":"#ddd",border:"none",borderRadius:14,padding:15,color:W,fontSize:14,fontWeight:"bold",cursor:"pointer",marginTop:4}},loading?"Inscription...":"✅ Rejoindre AHBAB"),
-React.createElement("div",{style:{textAlign:"center",marginTop:16,color:"#bbb",fontSize:10}},"Association AHBAB Elhadji Malick Seye — Dakar 🇸🇳"));}
-
-function Transparence(){
-const total=CAUSES.reduce((s,c)=>s+c.collecte,0);
-return React.createElement("div",{className:"fade",style:{paddingBottom:80}},
-React.createElement("div",{style:{background:"linear-gradient(135deg,#1a7a3a,#0d4a22)",padding:"16px 20px 20px",textAlign:"center"}},
-React.createElement("div",{style:{color:W,fontSize:16,fontWeight:"bold"}},"🔍 Rapport de Transparence"),
-React.createElement("div",{style:{color:"rgba(255,255,255,0.7)",fontSize:11,marginTop:3}},"Chaque don est tracé et utilisé avec intégrité")),
-React.createElement("div",{style:{padding:16}},
-CAUSES.map((c,i)=>{
+function carteCause(c,i){
 const pct=Math.round((c.collecte/c.objectif)*100);
-return React.createElement("div",{key:i,style:{background:W,borderRadius:14,padding:14,marginBottom:10,boxShadow:"0 2px 6px rgba(0,0,0,0.05)"}},
-React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}},
-React.createElement("div",{style:{color:"#222",fontSize:12,fontWeight:"bold"}},c.emoji+" "+c.titre),
-React.createElement("div",{style:{background:"#e8f5e9",borderRadius:10,padding:"2px 7px",color:G,fontSize:10,fontWeight:"bold"}},pct+"%")),
-React.createElement("div",{style:{background:"#f0f0f0",borderRadius:99,height:6,overflow:"hidden",marginBottom:5}},
-React.createElement("div",{style:{width:pct+"%",height:"100%",background:"linear-gradient(90deg,#1a7a3a,#27ae60)",borderRadius:99}})),
-React.createElement("div",{style:{display:"flex",justifyContent:"space-between"}},
-React.createElement("div",{style:{color:G,fontSize:11,fontWeight:"bold"}},fmt(c.collecte)+" F collectés"),
-React.createElement("div",{style:{color:"#999",fontSize:10}},c.donateurs+" donateurs")));
-}),
-React.createElement("div",{style:{background:"#e8f5e9",borderRadius:14,padding:16,textAlign:"center"}},
-React.createElement("div",{style:{color:G,fontSize:14,fontWeight:"bold",marginBottom:4}},"📊 Total collecté"),
-React.createElement("div",{style:{color:"#222",fontSize:24,fontWeight:"bold"}},fmt(total)+" FCFA"),
-React.createElement("div",{style:{color:"#888",fontSize:10,marginTop:3}},"Géré avec intégrité — Association AHBAB"))));}
+return `<div class="carte">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+<span style="font-size:24px;">${c.emoji}</span>
+<span class="tag" style="background:#e8f5e9;color:#1a7a3a;">${pct}% atteint</span>
+<div style="flex:1;"></div>
+<span style="color:#888;font-size:10px;">${c.donateurs} donateurs</span>
+</div>
+<div style="color:#222;font-size:14px;font-weight:bold;margin-bottom:4px;">${c.titre}</div>
+<div style="color:#888;font-size:11px;margin-bottom:10px;">${c.desc}</div>
+<div class="progress"><div class="bar" style="width:${pct}%;background:linear-gradient(90deg,${c.color},#27ae60);"></div></div>
+<div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+<div style="color:#1a7a3a;font-size:13px;font-weight:bold;">${fmt(c.collecte)} F</div>
+<div style="color:#aaa;font-size:10px;">sur ${fmt(c.objectif)} F</div>
+</div>
+<button class="btn-don" onclick="showModal('${c.titre}')">🤲 Faire un don pour cette cause</button>
+</div>`;}
 
-function Nav({page,setPage}){
-return React.createElement("div",{style:{position:"fixed",bottom:0,left:"50%",transform:"translateX(-50%)",width:"100%",maxWidth:480,background:W,borderTop:"1px solid #e8e8e8",display:"flex",justifyContent:"space-around",padding:"10px 0 20px",zIndex:100,boxShadow:"0 -4px 20px rgba(0,0,0,0.08)"}},
-[{id:"accueil",icon:"🏠",label:"Accueil"},{id:"dons",icon:"🤲",label:"Dons"},{id:"calendrier",icon:"📅",label:"Calendrier"},{id:"membres",icon:"👥",label:"Membres"},{id:"transparence",icon:"🔍",label:"Rapport"}].map(item=>
-React.createElement("button",{key:item.id,onClick:()=>setPage(item.id),style:{display:"flex",flexDirection:"column",alignItems:"center",gap:3,background:"none",border:"none",cursor:"pointer",padding:"0 6px"}},
-React.createElement("div",{style:{fontSize:22}},item.icon),
-React.createElement("div",{style:{fontSize:9,color:page===item.id?G:"#bbb",fontWeight:page===item.id?"bold":"normal"}},item.label))));}
+function renderAll(){
+// dons
+document.getElementById("dons-list").innerHTML=DONS.map((d,i)=>`
+<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;${i<DONS.length-1?"border-bottom:1px solid #f5f5f5":""}">
+<div style="display:flex;align-items:center;gap:10px;">
+<div style="width:34px;height:34px;border-radius:17px;background:linear-gradient(135deg,#1a7a3a,#27ae60);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:bold;">${d.nom[0]}</div>
+<div><div style="color:#333;font-size:12px;font-weight:bold;">${d.nom} ${d.pays}</div><div style="color:#999;font-size:10px;">${d.cause} • ${d.date}</div></div>
+</div>
+<div style="color:#1a7a3a;font-size:12px;font-weight:bold;">${fmt(d.montant)} F</div>
+</div>`).join("");
 
-const root=ReactDOM.createRoot(document.getElementById("root"));
-root.render(React.createElement(App));
+// causes preview
+document.getElementById("causes-preview").innerHTML=CAUSES.slice(0,3).map(carteCause).join("");
+document.getElementById("causes-all").innerHTML=CAUSES.map(carteCause).join("");
+
+// events preview
+document.getElementById("events-preview").innerHTML=EVENTS.slice(0,3).map((e,i)=>`
+<div style="display:flex;gap:10px;padding:9px 0;${i<2?"border-bottom:1px solid #f5f5f5":""}">
+<div style="min-width:44px;text-align:center;background:#e8f5e9;border-radius:10px;padding:5px 4px;flex-shrink:0;">
+<div style="color:#1a7a3a;font-size:9px;font-weight:bold;">${e.mois}</div>
+<div style="color:#1a7a3a;font-size:20px;font-weight:bold;line-height:1;">${e.jour}</div>
+</div>
+<div>
+<div style="color:#222;font-size:12px;font-weight:bold;">${e.icon} ${e.titre}</div>
+<div style="color:#888;font-size:10px;margin-top:2px;line-height:1.5;">${e.detail.substring(0,65)}...</div>
+</div>
+</div>`).join("");
+
+// events all
+document.getElementById("events-all").innerHTML=EVENTS.map((e,i)=>`
+<div class="event" onclick="toggleEvent(this)" style="border:1px solid #f0f0f0;">
+<div style="display:flex;gap:10px;align-items:flex-start;">
+<div style="min-width:46px;text-align:center;background:#e8f5e9;border-radius:10px;padding:6px 4px;flex-shrink:0;">
+<div style="color:#1a7a3a;font-size:9px;font-weight:bold;letter-spacing:1px;">${e.mois}</div>
+<div style="color:#1a7a3a;font-size:22px;font-weight:bold;line-height:1;">${e.jour}</div>
+</div>
+<div style="flex:1;">
+<div style="color:#222;font-size:13px;font-weight:bold;">${e.icon} ${e.titre}</div>
+<span class="tag" style="background:#f0f9f0;color:#1a7a3a;margin-top:3px;">${e.badge}</span>
+<div class="event-detail" style="display:none;color:#555;font-size:11px;margin-top:8px;line-height:1.7;border-top:1px solid #f0f0f0;padding-top:8px;">
+${e.detail}
+<div style="background:#e8f5e9;border-radius:10px;padding:8px 10px;margin-top:8px;color:#1a7a3a;font-size:11px;font-weight:bold;">🤲 Augmentez vos prières et dons ce jour béni !</div>
+</div>
+</div>
+<div style="color:#ddd;font-size:12px;flex-shrink:0;" class="arr">▼</div>
+</div>
+</div>`).join("");
+
+// rapport
+document.getElementById("rapport").innerHTML=CAUSES.map(c=>{
+const pct=Math.round((c.collecte/c.objectif)*100);
+return`<div style="background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 2px 6px rgba(0,0,0,0.05);">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+<div style="color:#222;font-size:12px;font-weight:bold;">${c.emoji} ${c.titre}</div>
+<span class="tag" style="background:#e8f5e9;color:#1a7a3a;">${pct}%</span>
+</div>
+<div class="progress"><div class="bar" style="width:${pct}%;"></div></div>
+<div style="display:flex;justify-content:space-between;">
+<div style="color:#1a7a3a;font-size:11px;font-weight:bold;">${fmt(c.collecte)} F collectés</div>
+<div style="color:#999;font-size:10px;">${c.donateurs} donateurs</div>
+</div>
+</div>`;}).join("");
+
+// montants modal
+document.getElementById("montants-grid").innerHTML=[5000,10000,25000,50000,100000,200000].map(m=>`
+<button onclick="selectMontant(this,'${m}')" style="background:#f8f8f8;border:1px solid #e0e0e0;border-radius:10px;padding:10px 4px;color:#333;font-size:11px;font-weight:bold;cursor:pointer;font-family:Georgia,serif;">${fmt(m)} F</button>`).join("");}
+
+function showPage(id){
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById("pg-"+id).classList.add("active");
+document.querySelectorAll("[id^='nav-'] span:last-child").forEach(s=>s.style.color="#bbb");
+const nav=document.querySelector("#nav-"+id+" span:last-child");
+if(nav)nav.style.color="#1a7a3a";
+window.scrollTo(0,0);}
+
+function showModal(titre){
+document.getElementById("modal-titre").textContent="🤲 Faire un don"+(titre?" — "+titre:"");
+document.getElementById("modal").style.display="flex";}
+
+function hideModal(){
+document.getElementById("modal").style.display="none";}
+
+function selectMontant(btn,val){
+document.querySelectorAll("#montants-grid button").forEach(b=>{b.style.background="#f8f8f8";b.style.borderColor="#e0e0e0";b.style.color="#333";});
+btn.style.background="#e8f5e9";btn.style.borderColor="#1a7a3a";btn.style.color="#1a7a3a";
+document.getElementById("montant-input").value=val;}
+
+function toggleEvent(el){
+const det=el.querySelector(".event-detail");
+const arr=el.querySelector(".arr");
+const open=det.style.display==="block";
+det.style.display=open?"none":"block";
+arr.textContent=open?"▼":"▲";
+el.style.borderColor=open?"#f0f0f0":"#1a7a3a";}
+
+function inscrireMembre(){
+const prenom=document.getElementById("m-prenom").value;
+const phone=document.getElementById("m-phone").value;
+if(!prenom||!phone)return;
+const id="AHBAB-"+Math.floor(Math.random()*9000+1000);
+document.getElementById("m-name").textContent=prenom;
+document.getElementById("m-details").innerHTML=`
+<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #f5f5f5;"><span style="color:#999;font-size:11px;">📱 Téléphone</span><span style="color:#333;font-size:11px;font-weight:bold;">${phone}</span></div>
+<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #f5f5f5;"><span style="color:#999;font-size:11px;">🆔 N° Membre</span><span style="color:#333;font-size:11px;font-weight:bold;">${id}</span></div>
+<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #f5f5f5;"><span style="color:#999;font-size:11px;">📅 Depuis</span><span style="color:#333;font-size:11px;font-weight:bold;">2026</span></div>
+<div style="display:flex;justify-content:space-between;padding:9px 0;"><span style="color:#999;font-size:11px;">💰 Total dons</span><span style="color:#333;font-size:11px;font-weight:bold;">0 FCFA</span></div>`;
+document.getElementById("membre-login").style.display="none";
+document.getElementById("membre-profil").style.display="block";}
+
+function deconnecterMembre(){
+document.getElementById("membre-login").style.display="block";
+document.getElementById("membre-profil").style.display="none";
+document.getElementById("m-prenom").value="";
+document.getElementById("m-phone").value="";}
+
+renderAll();
 </script>
 </body>
 </html>
