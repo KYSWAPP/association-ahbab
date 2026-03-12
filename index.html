@@ -16,7 +16,6 @@ button,input{font-family:Georgia,serif;outline:none;}
 .page{display:none;padding-bottom:80px;}
 .page.active{display:block;}
 .pulse{animation:pulse 2s ease infinite;}
-.g{color:#1a7a3a;}
 .btn-don{background:linear-gradient(135deg,#1a7a3a,#27ae60);border:none;border-radius:12px;padding:12px;color:#fff;font-size:13px;font-weight:bold;cursor:pointer;width:100%;font-family:Georgia,serif;}
 .carte{background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 2px 10px rgba(0,0,0,0.06);}
 .progress{background:#f0f0f0;border-radius:99px;height:8px;overflow:hidden;margin-bottom:8px;}
@@ -29,7 +28,6 @@ button,input{font-family:Georgia,serif;outline:none;}
 </head>
 <body>
 
-<!-- HEADER -->
 <div style="background:linear-gradient(135deg,#1a7a3a,#0d4a22);padding:44px 20px 14px;position:sticky;top:0;z-index:50;box-shadow:0 2px 20px rgba(0,0,0,0.2);">
   <div style="display:flex;justify-content:space-between;align-items:center;max-width:480px;margin:0 auto;">
     <div style="display:flex;align-items:center;gap:10px;">
@@ -46,10 +44,8 @@ button,input{font-family:Georgia,serif;outline:none;}
   </div>
 </div>
 
-<!-- WRAPPER -->
 <div style="max-width:480px;margin:0 auto;">
 
-<!-- PAGE ACCUEIL -->
 <div id="pg-accueil" class="page active fade">
   <div style="background:linear-gradient(160deg,#1a7a3a,#0d4a22);padding:20px 20px 28px;text-align:center;">
     <div style="color:rgba(255,255,255,0.8);font-size:14px;font-family:serif;margin-bottom:8px;">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
@@ -63,18 +59,16 @@ button,input{font-family:Georgia,serif;outline:none;}
     <button onclick="showModal()" class="pulse" style="background:#fff;border:none;border-radius:30px;padding:13px 32px;color:#1a7a3a;font-size:14px;font-weight:bold;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.2);font-family:Georgia,serif;">🤲 Faire un don maintenant</button>
   </div>
 
-  <!-- MOYENS PAIEMENT -->
   <div style="background:#fff;padding:16px 20px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
     <div style="color:#333;font-size:13px;font-weight:bold;margin-bottom:12px;text-align:center;">💳 Moyens de paiement disponibles</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-      <a href="https://pay.wave.com/m/M_OfXi7Xp9QZQZ/c/sn" target="_blank" style="background:#e8f5e9;border:2px solid #4CAF50;border-radius:12px;padding:12px 8px;text-align:center;text-decoration:none;display:flex;align-items:center;gap:8px;justify-content:center;"><span style="font-size:20px;">📱</span><span style="color:#4CAF50;font-size:12px;font-weight:bold;">Wave</span></a>
+      <a href="wavemobile://send?phone=+221774445336" style="background:#e8f5e9;border:2px solid #4CAF50;border-radius:12px;padding:12px 8px;text-align:center;text-decoration:none;display:flex;align-items:center;gap:8px;justify-content:center;"><span style="font-size:20px;">📱</span><span style="color:#4CAF50;font-size:12px;font-weight:bold;">Wave</span></a>
       <a href="tel:*144*2*774445336#" style="background:#fff3e0;border:2px solid #FF6600;border-radius:12px;padding:12px 8px;text-align:center;text-decoration:none;display:flex;align-items:center;gap:8px;justify-content:center;"><span style="font-size:20px;">🟠</span><span style="color:#FF6600;font-size:12px;font-weight:bold;">Orange Money</span></a>
       <a href="#" onclick="showModal()" style="background:#e3f2fd;border:2px solid #1565c0;border-radius:12px;padding:12px 8px;text-align:center;text-decoration:none;display:flex;align-items:center;gap:8px;justify-content:center;"><span style="font-size:20px;">💳</span><span style="color:#1565c0;font-size:12px;font-weight:bold;">Carte Bancaire</span></a>
       <a href="https://paypal.me/ahbabelhadj" target="_blank" style="background:#e8eaf6;border:2px solid #003087;border-radius:12px;padding:12px 8px;text-align:center;text-decoration:none;display:flex;align-items:center;gap:8px;justify-content:center;"><span style="font-size:20px;">🌍</span><span style="color:#003087;font-size:12px;font-weight:bold;">PayPal</span></a>
     </div>
   </div>
 
-  <!-- DERNIERS DONS -->
   <div style="background:#fff;padding:16px 20px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
       <div style="color:#333;font-size:13px;font-weight:bold;">❤️ Derniers dons</div>
@@ -83,21 +77,18 @@ button,input{font-family:Georgia,serif;outline:none;}
     <div id="dons-list"></div>
   </div>
 
-  <!-- CAUSES PREVIEW -->
   <div style="padding:0 16px;">
     <div style="color:#333;font-size:14px;font-weight:bold;margin-bottom:12px;">🌟 Nos Causes</div>
     <div id="causes-preview"></div>
     <button onclick="showPage('dons')" style="width:100%;background:none;border:2px solid #1a7a3a;border-radius:14px;padding:13px;color:#1a7a3a;font-size:13px;font-weight:bold;cursor:pointer;margin-bottom:16px;font-family:Georgia,serif;">Voir toutes les causes →</button>
   </div>
 
-  <!-- CALENDRIER PREVIEW -->
   <div style="background:#fff;padding:16px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
     <div style="color:#333;font-size:13px;font-weight:bold;margin-bottom:12px;">📅 Événements Prophétiques</div>
     <div id="events-preview"></div>
   </div>
 </div>
 
-<!-- PAGE DONS -->
 <div id="pg-dons" class="page">
   <div style="padding:16px;">
     <div style="color:#333;font-size:16px;font-weight:bold;margin-bottom:4px;">🌟 Toutes les Causes</div>
@@ -106,7 +97,6 @@ button,input{font-family:Georgia,serif;outline:none;}
   </div>
 </div>
 
-<!-- PAGE CALENDRIER -->
 <div id="pg-calendrier" class="page">
   <div style="background:linear-gradient(135deg,#1a7a3a,#0d4a22);padding:16px 20px 20px;text-align:center;">
     <div style="color:#fff;font-size:16px;font-weight:bold;">📅 Calendrier Prophétique 2026</div>
@@ -122,7 +112,6 @@ button,input{font-family:Georgia,serif;outline:none;}
   </div>
 </div>
 
-<!-- PAGE MEMBRES -->
 <div id="pg-membres" class="page">
   <div id="membre-login" style="padding:24px 20px;">
     <div style="text-align:center;margin-bottom:24px;">
@@ -153,7 +142,6 @@ button,input{font-family:Georgia,serif;outline:none;}
   </div>
 </div>
 
-<!-- PAGE TRANSPARENCE -->
 <div id="pg-transparence" class="page">
   <div style="background:linear-gradient(135deg,#1a7a3a,#0d4a22);padding:16px 20px 20px;text-align:center;">
     <div style="color:#fff;font-size:16px;font-weight:bold;">🔍 Rapport de Transparence</div>
@@ -169,9 +157,8 @@ button,input{font-family:Georgia,serif;outline:none;}
   </div>
 </div>
 
-</div><!-- fin wrapper -->
+</div>
 
-<!-- MODAL DON -->
 <div id="modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:200;align-items:flex-end;justify-content:center;">
   <div style="background:#fff;border-radius:22px 22px 0 0;width:100%;max-width:480px;padding:22px;max-height:88vh;overflow-y:auto;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
@@ -182,31 +169,30 @@ button,input{font-family:Georgia,serif;outline:none;}
     <input type="number" id="montant-input" class="input" placeholder="Autre montant en FCFA..." style="margin-bottom:10px;"/>
     <input type="text" id="nom-input" class="input" placeholder="Votre prénom (optionnel)"/>
     <div style="color:#999;font-size:11px;text-align:center;margin-bottom:12px;">Choisissez votre moyen de paiement</div>
-    <a href="https://pay.wave.com/m/M_OfXi7Xp9QZQZ/c/sn" target="_blank" class="moyen" style="background:#e8f5e9;border-color:#4CAF50;">
+    <a href="wavemobile://send?phone=+221774445336" class="moyen" style="background:#e8f5e9;border-color:#4CAF50;">
       <span style="font-size:22px;">📱</span>
-      <div style="flex:1;"><div style="color:#4CAF50;font-size:13px;font-weight:bold;">Payer via Wave</div></div>
+      <div style="flex:1;"><div style="color:#4CAF50;font-size:13px;font-weight:bold;">Payer via Wave</div><div style="color:#888;font-size:10px;">Envoi direct au +221 77 444 53 36</div></div>
       <span style="color:#4CAF50;font-size:16px;">→</span>
     </a>
     <a href="tel:*144*2*774445336#" class="moyen" style="background:#fff3e0;border-color:#FF6600;">
       <span style="font-size:22px;">🟠</span>
-      <div style="flex:1;"><div style="color:#FF6600;font-size:13px;font-weight:bold;">Payer via Orange Money</div></div>
+      <div style="flex:1;"><div style="color:#FF6600;font-size:13px;font-weight:bold;">Payer via Orange Money</div><div style="color:#888;font-size:10px;">Transfert au +221 77 444 53 36</div></div>
       <span style="color:#FF6600;font-size:16px;">→</span>
     </a>
     <a href="#" class="moyen" style="background:#e3f2fd;border-color:#1565c0;">
       <span style="font-size:22px;">💳</span>
-      <div style="flex:1;"><div style="color:#1565c0;font-size:13px;font-weight:bold;">Payer par Carte Bancaire</div></div>
+      <div style="flex:1;"><div style="color:#1565c0;font-size:13px;font-weight:bold;">Payer par Carte Bancaire</div><div style="color:#888;font-size:10px;">Bientôt disponible</div></div>
       <span style="color:#1565c0;font-size:16px;">→</span>
     </a>
     <a href="https://paypal.me/ahbabelhadj" target="_blank" class="moyen" style="background:#e8eaf6;border-color:#003087;">
       <span style="font-size:22px;">🌍</span>
-      <div style="flex:1;"><div style="color:#003087;font-size:13px;font-weight:bold;">PayPal — International</div></div>
+      <div style="flex:1;"><div style="color:#003087;font-size:13px;font-weight:bold;">PayPal — International</div><div style="color:#888;font-size:10px;">Dons depuis l'étranger</div></div>
       <span style="color:#003087;font-size:16px;">→</span>
     </a>
     <div style="text-align:center;margin-top:14px;color:#bbb;font-size:10px;">🔒 Sécurisé • Association AHBAB Elhadji Malick Seye</div>
   </div>
 </div>
 
-<!-- NAV -->
 <div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid #e8e8e8;display:flex;justify-content:space-around;padding:10px 0 20px;z-index:100;box-shadow:0 -4px 20px rgba(0,0,0,0.08);">
   <button onclick="showPage('accueil')" id="nav-accueil" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:0 6px;"><span style="font-size:22px;">🏠</span><span style="font-size:9px;color:#1a7a3a;font-weight:bold;">Accueil</span></button>
   <button onclick="showPage('dons')" id="nav-dons" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:0 6px;"><span style="font-size:22px;">🤲</span><span style="font-size:9px;color:#bbb;">Dons</span></button>
@@ -246,9 +232,9 @@ const EVENTS=[
 
 const fmt=n=>(Number(n)||0).toLocaleString("fr-FR");
 
-function carteCause(c,i){
+function carteCause(c){
 const pct=Math.round((c.collecte/c.objectif)*100);
-return `<div class="carte">
+return`<div class="carte">
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
 <span style="font-size:24px;">${c.emoji}</span>
 <span class="tag" style="background:#e8f5e9;color:#1a7a3a;">${pct}% atteint</span>
@@ -266,7 +252,6 @@ return `<div class="carte">
 </div>`;}
 
 function renderAll(){
-// dons
 document.getElementById("dons-list").innerHTML=DONS.map((d,i)=>`
 <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;${i<DONS.length-1?"border-bottom:1px solid #f5f5f5":""}">
 <div style="display:flex;align-items:center;gap:10px;">
@@ -276,11 +261,9 @@ document.getElementById("dons-list").innerHTML=DONS.map((d,i)=>`
 <div style="color:#1a7a3a;font-size:12px;font-weight:bold;">${fmt(d.montant)} F</div>
 </div>`).join("");
 
-// causes preview
 document.getElementById("causes-preview").innerHTML=CAUSES.slice(0,3).map(carteCause).join("");
 document.getElementById("causes-all").innerHTML=CAUSES.map(carteCause).join("");
 
-// events preview
 document.getElementById("events-preview").innerHTML=EVENTS.slice(0,3).map((e,i)=>`
 <div style="display:flex;gap:10px;padding:9px 0;${i<2?"border-bottom:1px solid #f5f5f5":""}">
 <div style="min-width:44px;text-align:center;background:#e8f5e9;border-radius:10px;padding:5px 4px;flex-shrink:0;">
@@ -293,8 +276,7 @@ document.getElementById("events-preview").innerHTML=EVENTS.slice(0,3).map((e,i)=
 </div>
 </div>`).join("");
 
-// events all
-document.getElementById("events-all").innerHTML=EVENTS.map((e,i)=>`
+document.getElementById("events-all").innerHTML=EVENTS.map((e)=>`
 <div class="event" onclick="toggleEvent(this)" style="border:1px solid #f0f0f0;">
 <div style="display:flex;gap:10px;align-items:flex-start;">
 <div style="min-width:46px;text-align:center;background:#e8f5e9;border-radius:10px;padding:6px 4px;flex-shrink:0;">
@@ -313,7 +295,6 @@ ${e.detail}
 </div>
 </div>`).join("");
 
-// rapport
 document.getElementById("rapport").innerHTML=CAUSES.map(c=>{
 const pct=Math.round((c.collecte/c.objectif)*100);
 return`<div style="background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 2px 6px rgba(0,0,0,0.05);">
@@ -328,7 +309,6 @@ return`<div style="background:#fff;border-radius:14px;padding:14px;margin-bottom
 </div>
 </div>`;}).join("");
 
-// montants modal
 document.getElementById("montants-grid").innerHTML=[5000,10000,25000,50000,100000,200000].map(m=>`
 <button onclick="selectMontant(this,'${m}')" style="background:#f8f8f8;border:1px solid #e0e0e0;border-radius:10px;padding:10px 4px;color:#333;font-size:11px;font-weight:bold;cursor:pointer;font-family:Georgia,serif;">${fmt(m)} F</button>`).join("");}
 
@@ -336,16 +316,16 @@ function showPage(id){
 document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
 document.getElementById("pg-"+id).classList.add("active");
 document.querySelectorAll("[id^='nav-'] span:last-child").forEach(s=>s.style.color="#bbb");
+document.querySelectorAll("[id^='nav-'] span:last-child").forEach(s=>s.style.fontWeight="normal");
 const nav=document.querySelector("#nav-"+id+" span:last-child");
-if(nav)nav.style.color="#1a7a3a";
+if(nav){nav.style.color="#1a7a3a";nav.style.fontWeight="bold";}
 window.scrollTo(0,0);}
 
 function showModal(titre){
 document.getElementById("modal-titre").textContent="🤲 Faire un don"+(titre?" — "+titre:"");
 document.getElementById("modal").style.display="flex";}
 
-function hideModal(){
-document.getElementById("modal").style.display="none";}
+function hideModal(){document.getElementById("modal").style.display="none";}
 
 function selectMontant(btn,val){
 document.querySelectorAll("#montants-grid button").forEach(b=>{b.style.background="#f8f8f8";b.style.borderColor="#e0e0e0";b.style.color="#333";});
