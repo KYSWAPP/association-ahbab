@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<meta name="theme-color" content="#1a7a3a"/>
+<title>AHBAB — Elhadji Malick Seye</title>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f5f7f5;font-family:Georgia,serif;overflow-x:hidden;}
+button,input{font-family:Georgia,serif;}
+::-webkit-scrollbar{display:none;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.04);}}
+.fade{animation:fadeIn 0.4s ease forwards;}
+.pulse{animation:pulse 2s ease infinite;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState}=React;
+const G="#1a7a3a",GL="#27ae60",W="#fff",BG="#f5f7f5",GOLD="#c9a84c";
+const fmt=n=>(Number(n)||0).toLocaleString("fr-FR");
+
+const CAUSES=[
+{id:1,titre:"Soutien aux Orphelins",emoji:"🧒",desc:"Offrez un avenir à des enfants sans parents",objectif:5000000,collecte:2340000,donateurs:47,color:"#1a7a3a"},
+{id:2,titre:"Aide aux Malades",emoji:"🏥",desc:"Soins médicaux pour ceux qui n'ont pas les moyens",objectif:3000000,collecte:1200000,donateurs:31,color:"#1565c0"},
+{id:3,titre:"Les Talibés",emoji:"📚",desc:"Nourriture et soutien aux jeunes talibés",objectif:2000000,collecte:890000,donateurs:28,color:"#e65100"},
+{id:4,titre:"Familles Démunies",emoji:"🏠",desc:"Aide urgente pour familles en difficulté",objectif:4000000,collecte:1650000,donateurs:39,color:"#6a1b9a"},
+{id:5,titre:"Zakat Al-Mal",emoji:"💰",desc:"Versez votre Zakat — certificat officiel",objectif:10000000,collecte:4500000,donateurs:82,color:"#1a7a3a"},
+{id:6,titre:"Sadaqa Jariya",emoji:"🕌",desc:"Mosquée, puits, Coran — récompense éternelle",objectif:8000000,collecte:3200000,donateurs:64,color:"#1a7a3a"},
+];
+
+const EVENTS=[
+{mois:"FÉV",jour:"26",titre:"1er Ramadan du Prophète ﷺ",detail:"Le Prophète ﷺ observa le premier jeûne du Ramadan en l'an 2 AH avec 305 Sahaba. Une nuit de larmes et de prières intenses avant la bataille de Badr.",badge:"305 Sahaba",icon:"🌙"},
+{mois:"MAR",jour:"5",titre:"Jour de l'Éléphant — Naissance du Prophète ﷺ",detail:"Naissance de Muhammad ﷺ en 570 AD. Allah détruisit l'armée d'Abraha pour protéger la Kaaba. Le meilleur des êtres vit le jour.",badge:"570 AD",icon:"🌹"},
+{mois:"MAR",jour:"6",titre:"Hajj Al-Widah — Pèlerinage d'Adieu",detail:"Dernier Hajj du Prophète ﷺ en l'an 10 AH avec 124 000 Sahaba. Sermon historique sur l'égalité et la fraternité islamique.",badge:"124 000 Sahaba",icon:"🕋"},
+{mois:"MAR",jour:"13",titre:"Bataille de Badr Al-Kubra",detail:"Victoire décisive — 313 musulmans contre 1000. Le Prophète ﷺ pleura et pria toute la nuit. Allah envoya les anges soutenir les croyants.",badge:"313 Sahaba",icon:"⚔️"},
+{mois:"MAR",jour:"23",titre:"Bataille de Ouhud",detail:"70 Sahaba martyrs dont Hamza ؓ oncle du Prophète ﷺ. Grande leçon d'obéissance — les archers quittèrent leurs postes et causèrent la défaite.",badge:"70 martyrs",icon:"🌹"},
+{mois:"AVR",jour:"20",titre:"Hijra — La Grande Migration",detail:"L'exil du Prophète ﷺ de Makkah vers Médine en 622 AD. Début du calendrier islamique et naissance de la première communauté musulmane unie.",badge:"622 AD",icon:"🕊️"},
+{mois:"AVR",jour:"28",titre:"Libération de La Mecque",detail:"Conquête pacifique — 10 000 Sahaba. Le Prophète ﷺ entra tête baissée en signe d'humilité. Amnistie générale pour tous les Mecquois.",badge:"10 000 Sahaba",icon:"🕋"},
+{mois:"MAI",jour:"12",titre:"Mawlid — Naissance du Prophète ﷺ",detail:"12 Rabi Al-Awwal — Commémoration de la naissance du meilleur des hommes. Jour de joie et de Salat sur le Prophète ﷺ.",badge:"12 Rabi Al-Awwal",icon:"🌟"},
+{mois:"JUN",jour:"8",titre:"Décès du Prophète ﷺ",detail:"12 Rabi Al-Awwal 11 AH. Lisez abondamment la Salat sur le Prophète ﷺ. Récitez le Coran et faites du bien en son souvenir.",badge:"11 AH",icon:"🤲"},
+{mois:"JUN",jour:"15",titre:"Bataille de Khaybar",detail:"Victoire des musulmans en l'an 7 AH. Ali ibn Abi Talib ؓ porta l'étendard. Grande démonstration de la foi et du courage.",badge:"An 7 AH",icon:"⚔️"},
+];
+
+const DONS=[
+{nom:"Moussa D.",montant:50000,cause:"Orphelins",date:"Il y a 2h",pays:"🇸🇳"},
+{nom:"Fatima K.",montant:25000,cause:"Zakat",date:"Il y a 3h",pays:"🇫🇷"},
+{nom:"Ibrahim S.",montant:100000,cause:"Sadaqa Jariya",date:"Il y a 5h",pays:"🇸🇳"},
+{nom:"Aïcha M.",montant:75000,cause:"Malades",date:"Il y a 6h",pays:"🇧🇪"},
+{nom:"Omar B.",montant:30000,cause:"Talibés",date:"Il y a 8h",pays:"🇸🇳"},
+];
+
+const MOYENS=[
+{label:"Wave",icon:"📱",color:"#4CAF50",bg:"#e8f5e9",href:"https://pay.wave.com/m/M_OfXi7Xp9QZQZ/c/sn"},
+{label:"Orange Money",icon:"🟠",color:"#FF6600",bg:"#fff3e0",href:"tel:*144*2*774445336#"},
+{label:"Carte Bancaire",icon:"💳",color:"#1565c0",bg:"#e3f2fd",href:"#carte"},
+{label:"PayPal International",icon:"🌍",color:"#003087",bg:"#e8eaf6",href:"https://paypal.me/ahbabelhadj"},
+];
+
+function App(){
+const [page,setPage]=useState("accueil");
+const [modal,setModal]=useState(null);
+const [membre,setMembre]=useState(null);
+return React.createElement("div",{style:{maxWidth:480,margin:"0 auto",minHeight:"100vh",background:BG,position:"relative"}},
+modal&&React.createElement(Modal,{cause:modal,onClose:()=>setModal(null)}),
+React.createElement(Header),
+page==="accueil"&&React.createElement(Accueil,{setPage,setModal}),
+page==="dons"&&React.createElement(Dons,{setModal}),
+page==="calendrier"&&React.createElement(Calendrier),
+page==="membres"&&React.createElement(Membres,{membre,setMembre}),
+page==="transparence"&&React.createElement(Transparence),
+React.createElement(Nav,{page,setPage}));}
+
+function Header(){
+return React.createElement("div",{style:{background:"linear-gradient(135deg,#1a7a3a,#0d4a22)",padding:"44px 20px 14px",position:"sticky",top:0,zIndex:50,boxShadow:"0 2px 20px rgba(0,0,0,0.2)"}},
+React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center"}},
+React.createElement("div",{style:{display:"flex",alignItems:"center",gap:10}},
+React.createElement("div",{style:{width:40,height:40,borderRadius:20,background:"rgba(255,255,255,0.15)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,border:"2px solid rgba(255,255,255,0.3)"}},"🤲"),
+React.createElement("div",null,
+React.createElement("div",{style:{color:W,fontSize:17,fontWeight:"bold",letterSpacing:1}},"AHBAB"),
+React.createElement("div",{style:{color:"rgba(255,255,255,0.65)",fontSize:10}},"Elhadji Malick Seye"))),
+React.createElement("div",{style:{background:"rgba(255,255,255,0.15)",borderRadius:20,padding:"5px 12px",display:"flex",alignItems:"center",gap:6}},
+React.createElement("div",{style:{width:7,height:7,borderRadius:4,background:GL}}),
+React.createElement("div",{style:{color:W,fontSize:10}},"En ligne"))));}
+
+function Accueil({setPage,setModal}){
+const total=CAUSES.reduce((s,c)=>s+c.collecte,0);
+const dons=CAUSES.reduce((s,c)=>s+c.donateurs,0);
+return React.createElement("div",{className:"fade",style:{paddingBottom:80}},
+React.createElement("div",{style:{background:"linear-gradient(160deg,#1a7a3a,#0d4a22)",padding:"20px 20px 28px",textAlign:"center"}},
+React.createElement("div",{style:{color:"rgba(255,255,255,0.8)",fontSize:14,fontFamily:"serif",marginBottom:8}},"بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ"),
+React.createElement("div",{style:{color:W,fontSize:20,fontWeight:"bold",lineHeight:1.4,marginBottom:6}},"Ensemble pour les plus vulnérables"),
+React.createElement("div",{style:{color:"rgba(255,255,255,0.75)",fontSize:12,marginBottom:20}},"Association AHBAB — Dakar, Sénégal 🇸🇳"),
+React.createElement("div",{style:{display:"flex",justifyContent:"center",gap:24,marginBottom:22}},
+[{n:fmt(total)+" F",l:"Collectés"},{n:dons+"+",l:"Donateurs"},{n:CAUSES.length+"",l:"Causes"}].map((s,i)=>
+React.createElement("div",{key:i,style:{textAlign:"center"}},
+React.createElement("div",{style:{color:W,fontSize:18,fontWeight:"bold"}},s.n),
+React.createElement("div",{style:{color:"rgba(255,255,255,0.65)",fontSize:10,marginTop:2}},s.l)))),
+React.createElement("button",{onClick:()=>setModal(null),className:"pulse",style:{background:W,border:"none",borderRadius:30,padding:"13px 32px",color:G,fontSize:14,fontWeight:"bold",cursor:"pointer",boxShadow:"0 4px 20px rgba(0,0,0,0.2)"}},"🤲 Faire un don maintenant")),
+React.createElement("div",{style:{background:W,padding:"16px 20px",marginBottom:12,boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}},
+React.createElement("div",{style:{color:"#333",fontSize:13,fontWeight:"bold",marginBottom:12,textAlign:"center"}},"💳 Moyens de paiement disponibles"),
+React.createElement("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}},
+MOYENS.map((m,i)=>
+React.createElement("a",{key:i,href:m.href,target:"_blank",style:{background:m.bg,border:"2px solid "+m.color,borderRadius:12,padding:"12px 8px",textAlign:"center",textDecoration:"none",display:"flex",alignItems:"center",gap:8,justifyContent:"center"}},
+React.createElement("div",{style:{fontSize:20}},m.icon),
+React.createElement("div",{style:{color:m.color,fontSize:12,fontWeight:"bold"}},m.label))))),
+React.createElement("div",{style:{background:W,padding:"16px 20px",marginBottom:12,boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}},
+React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}},
+React.createElement("div",{style:{color:"#333",fontSize:13,fontWeight:"bold"}},"❤️ Derniers dons"),
+React.createElement("div",{style:{background:"#e8f5e9",borderRadius:10,padding:"3px 8px",color:G,fontSize:10,fontWeight:"bold"}},"EN DIRECT")),
+DONS.map((d,i)=>
+React.createElement("div",{key:i,style:{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"9px 0",borderBottom:i<DONS.length-1?"1px solid #f5f5f5":"none"}},
+React.createElement("div",{style:{display:"flex",alignItems:"center",gap:10}},
+React.createElement("div",{style:{width:34,height:34,borderRadius:17,background:"linear-gradient(135deg,#1a7a3a,#27ae60)",display:"flex",alignItems:"center",justifyContent:"center",color:W,fontSize:13,fontWeight:"bold"}},d.nom[0]),
+React.createElement("div",null,
+React.createElement("div",{style:{color:"#333",fontSize:12,fontWeight:"bold"}},d.nom+" "+d.pays),
+React.createElement("div",{style:{color:"#999",fontSize:10}},d.cause+" • "+d.date))),
+React.createElement("div",{style:{color:G,fontSize:12,fontWeight:"bold"}},fmt(d.montant)+" F")))),
+React.createElement("div",{style:{padding:"0 16px"}},
+React.createElement("div",{style:{color:"#333",fontSize:14,fontWeight:"bold",marginBottom:12}},"🌟 Nos Causes"),
+CAUSES.slice(0,3).map((c,i)=>React.createElement(Carte,{key:i,cause:c,setModal})),
+React.createElement("button",{onClick:()=>setPage("dons"),style:{width:"100%",background:"none",border:"2px solid "+G,borderRadius:14,padding:13,color:G,fontSize:13,fontWeight:"bold",cursor:"pointer",marginBottom:16}},"Voir toutes les causes →")),
+React.createElement("div",{style:{background:W,padding:"16px 20px",boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}},
+React.createElement("div",{style:{color:"#333",fontSize:13,fontWeight:"bold",marginBottom:12}},"📅 Événements Prophétiques"),
+EVENTS.slice(0,3).map((e,i)=>
+React.createElement("div",{key:i,style:{display:"flex",gap:10,padding:"9px 0",borderBottom:i<2?"1px solid #f5f5f5":"none"}},
+React.createElement("div",{style:{minWidth:44,textAlign:"center",background:"#e8f5e9",borderRadius:10,padding:"5px 4px",flexShrink:0}},
+React.createElement("div",{style:{color:G,fontSize:9,fontWeight:"bold"}},e.mois),
+React.createElement("div",{style:{color:G,fontSize:20,fontWeight:"bold",lineHeight:1}},e.jour)),
+React.createElement("div",null,
+React.createElement("div",{style:{color:"#222",fontSize:12,fontWeight:"bold"}},e.icon+" "+e.titre),
+React.createElement("div",{style:{color:"#888",fontSize:10,marginTop:2,lineHeight:1.5}},e.detail.substring(0,65)+"...")))))
+);}
+
+function Carte({cause,setModal}){
+const pct=Math.round((cause.collecte/cause.objectif)*100);
+return React.createElement("div",{style:{background:W,borderRadius:16,padding:16,marginBottom:12,boxShadow:"0 2px 10px rgba(0,0,0,0.06)"}},
+React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:8}},
+React.createElement("span",{style:{fontSize:24}},cause.emoji),
+React.createElement("span",{style:{background:"#e8f5e9",borderRadius:10,padding:"2px 8px",color:G,fontSize:10,fontWeight:"bold"}},pct+"% atteint"),
+React.createElement("div",{style:{flex:1}}),
+React.createElement("div",{style:{color:"#888",fontSize:10}},cause.donateurs+" donateurs")),
+React.createElement("div",{style:{color:"#222",fontSize:14,fontWeight:"bold",marginBottom:4}},cause.titre),
+React.createElement("div",{style:{color:"#888",fontSize:11,marginBottom:10}},cause.desc),
+React.createElement("div",{style:{background:"#f0f0f0",borderRadius:99,height:8,overflow:"hidden",marginBottom:8}},
+React.createElement("div",{style:{width:pct+"%",height:"100%",background:"linear-gradient(90deg,"+cause.color+","+GL+")",borderRadius:99}})),
+React.createElement("div",{style:{display:"flex",justifyContent:"space-between",marginBottom:12}},
+React.createElement("div",{style:{color:G,fontSize:13,fontWeight:"bold"}},fmt(cause.collecte)+" F"),
+React.createElement("div",{style:{color:"#aaa",fontSize:10}},"sur "+fmt(cause.objectif)+" F")),
+React.createElement("button",{onClick:()=>setModal(cause),style:{width:"100%",background:"linear-gradient(135deg,#1a7a3a,#27ae60)",border:"none",borderRadius:12,padding:12,color:W,fontSize:13,fontWeight:"bold",cursor:"pointer"}},"🤲 Faire un don"));}
+
+function Modal({cause,onClose}){
+const [montant,setMontant]=useState("");
+const [nom,setNom]=useState("");
+return React.createElement("div",{style:{position:"fixed",inset:0,background:"rgba(0,0,0,0.65)",zIndex:200,display:"flex",alignItems:"flex-end",justifyContent:"center"}},
+React.createElement("div",{style:{background:W,borderRadius:"22px 22px 0 0",width:"100%",maxWidth:480,padding:22,maxHeight:"88vh",overflowY:"auto"}},
+React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16}},
+React.createElement("div",{style:{color:"#222",fontSize:15,fontWeight:"bold"}},"🤲 Faire un don"+(cause?" — "+cause.titre:"")),
+React.createElement("button",{onClick:onClose,style:{background:"#f5f5f5",border:"none",borderRadius:20,width:30,height:30,cursor:"pointer",fontSize:16}},"×")),
+React.createElement("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:8,marginBottom:12}},
+[5000,10000,25000,50000,100000,200000].map((m,i)=>
+React.createElement("button",{key:i,onClick:()=>setMontant(String(m)),style:{background:montant===String(m)?"#e8f5e9":"#f8f8f8",border:"1px solid "+(montant===String(m)?G:"#e0e0e0"),borderRadius:10,padding:"10px 4px",color:montant===String(m)?G:"#333",fontSize:11,fontWeight:"bold",cursor:"pointer"}},fmt(m)+" F"))),
+React.createElement("input",{type:"number",value:montant,onChange:e=>setMontant(e.target.value),placeholder:"Autre montant en FCFA...",style:{width:"100%",border:"1px solid #e0e0e0",borderRadius:12,padding:"12px 14px",fontSize:13,outline:"none",marginBottom:10,boxSizing:"border-box"}}),
+React.createElement("input",{type:"text",value:nom,onChange:e=>setNom(e.target.value),placeholder:"Votre prénom (optionnel)",style:{width:"100%",border:"1px solid #e0e0e0",borderRadius:12,padding:"12px 14px",fontSize:13,outline:"none",marginBottom:16,boxSizing:"border-box"}}),
+React.createElement("div",{style:{color:"#999",fontSize:11,textAlign:"center",marginBottom:12}},"Choisissez votre moyen de paiement"),
+React.createElement("div",{style:{display:"flex",flexDirection:"column",gap:10}},
+MOYENS.map((m,i)=>
+React.createElement("a",{key:i,href:m.href,target:"_blank",style:{background:m.bg,border:"2px solid "+m.color,borderRadius:14,padding:"13px 16px",display:"flex",alignItems:"center",gap:12,textDecoration:"none"}},
+React.createElement("div",{style:{fontSize:22}},m.icon),
+React.createElement("div",{style:{flex:1}},
+React.createElement("div",{style:{color:m.color,fontSize:13,fontWeight:"bold"}},m.label),
+montant&&React.createElement("div",{style:{color:"#888",fontSize:10,marginTop:1}},"Montant: "+fmt(Number(montant))+" FCFA")),
+React.createElement("div",{style:{color:m.color,fontSize:16}},"→")))),
+React.createElement("div",{style:{textAlign:"center",marginTop:14,color:"#bbb",fontSize:10}},"🔒 Sécurisé • Association AHBAB Elhadji Malick Seye")));}
+
+function Dons({setModal}){
+return React.createElement("div",{className:"fade",style:{padding:"16px 16px 80px"}},
+React.createElement("div",{style:{color:"#333",fontSize:16,fontWeight:"bold",marginBottom:4}},"🌟 Toutes les Causes"),
+React.createElement("div",{style:{color:"#888",fontSize:11,marginBottom:14}},"Chaque don compte — Jazakallahu Khayran 🤲"),
+CAUSES.map((c,i)=>React.createElement(Carte,{key:i,cause:c,setModal})));}
+
+function Calendrier(){
+const [sel,setSel]=useState(null);
+return React.createElement("div",{className:"fade",style:{paddingBottom:80}},
+React.createElement("div",{style:{background:"linear-gradient(135deg,#1a7a3a,#0d4a22)",padding:"16px 20px 20px",textAlign:"center"}},
+React.createElement("div",{style:{color:W,fontSize:16,fontWeight:"bold"}},"📅 Calendrier Prophétique 2026"),
+React.createElement("div",{style:{color:"rgba(255,255,255,0.7)",fontSize:11,marginTop:4}},"Vie et événements du Prophète Muhammad ﷺ"),
+React.createElement("div",{style:{color:GOLD,fontSize:15,fontFamily:"serif",marginTop:8}},"اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ")),
+React.createElement("div",{style:{padding:16}},
+React.createElement("div",{style:{background:"#e8f5e9",borderRadius:14,padding:12,marginBottom:14,textAlign:"center"}},
+React.createElement("div",{style:{color:G,fontSize:12,fontWeight:"bold"}},"🌟 Ces jours sont des opportunités de rapprochement d'Allah ﷻ"),
+React.createElement("div",{style:{color:"#555",fontSize:10,marginTop:3}},"Augmentez vos prières, invocations et dons ces jours bénis")),
+EVENTS.map((e,i)=>
+React.createElement("div",{key:i,onClick:()=>setSel(sel===i?null:i),style:{background:W,borderRadius:16,padding:14,marginBottom:10,cursor:"pointer",boxShadow:"0 2px 8px rgba(0,0,0,0.05)",border:"1px solid "+(sel===i?"#1a7a3a":"#f0f0f0")}},
+React.createElement("div",{style:{display:"flex",gap:10,alignItems:"flex-start"}},
+React.createElement("div",{style:{minWidth:46,textAlign:"center",background:"#e8f5e9",borderRadius:10,padding:"6px 4px",flexShrink:0}},
+React.createElement("div",{style:{color:G,fontSize:9,fontWeight:"bold",letterSpacing:1}},e.mois),
+React.createElement("div",{style:{color:G,fontSize:22,fontWeight:"bold",lineHeight:1}},e.jour)),
+React.createElement("div",{style:{flex:1}},
+React.createElement("div",{style:{color:"#222",fontSize:13,fontWeight:"bold"}},e.icon+" "+e.titre),
+React.createElement("div",{style:{background:"#f0f9f0",borderRadius:8,padding:"2px 7px",color:G,fontSize:9,fontWeight:"bold",display:"inline-block",marginTop:3}},e.badge),
+sel===i&&React.createElement("div",{style:{color:"#555",fontSize:11,marginTop:8,lineHeight:1.7,borderTop:"1px solid #f0f0f0",paddingTop:8}},
+e.detail,
+React.createElement("div",{style:{background:"#e8f5e9",borderRadius:10,padding:"8px 10px",marginTop:8,color:G,fontSize:11,fontWeight:"bold"}},"🤲 Augmentez vos prières et dons ce jour béni !"))),
+React.createElement("div",{style:{color:"#ddd",fontSize:12,flexShrink:0}},sel===i?"▲":"▼")))));}
+
+function Membres({membre,setMembre}){
+const [prenom,setPrenom]=useState("");
+const [phone,setPhone]=useState("");
+const [loading,setLoading]=useState(false);
+const NIVEAUX=[{min:0,label:"Bienfaiteur",icon:"🌱"},{min:100000,label:"Mécène",icon:"⭐"},{min:500000,label:"Wali",icon:"🌟"},{min:1000000,label:"Grand Mécène",icon:"👑"}];
+const niv=membre?NIVEAUX.filter(n=>(membre.totalDons||0)>=n.min).pop()||NIVEAUX[0]:NIVEAUX[0];
+const inscrire=()=>{
+if(!prenom||!phone)return;
+setLoading(true);
+setTimeout(()=>{setMembre({prenom,phone,totalDons:0,depuis:"2026",id:"AHBAB-"+Math.floor(Math.random()*9000+1000)});setLoading(false);},1000);};
+if(membre)return React.createElement("div",{className:"fade",style:{paddingBottom:80}},
+React.createElement("div",{style:{background:"linear-gradient(135deg,#1a7a3a,#0d4a22)",padding:"24px 20px",textAlign:"center"}},
+React.createElement("div",{style:{width:70,height:70,borderRadius:35,background:"rgba(255,255,255,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:32,margin:"0 auto 12px",border:"3px solid rgba(255,255,255,0.4)"}},"👤"),
+React.createElement("div",{style:{color:W,fontSize:20,fontWeight:"bold"}},membre.prenom),
+React.createElement("div",{style:{background:"rgba(255,255,255,0.15)",borderRadius:20,padding:"4px 14px",display:"inline-block",marginTop:8,color:W,fontSize:12}},niv.icon+" "+niv.label)),
+React.createElement("div",{style:{padding:16}},
+React.createElement("div",{style:{background:W,borderRadius:16,padding:16,marginBottom:12,boxShadow:"0 2px 8px rgba(0,0,0,0.06)"}},
+React.createElement("div",{style:{color:"#999",fontSize:10,marginBottom:10,letterSpacing:1}},"MA CARTE DE MEMBRE"),
+[["📱","Téléphone",membre.phone],["🆔","N° Membre",membre.id],["📅","Depuis",membre.depuis],["💰","Total dons",fmt(membre.totalDons)+" FCFA"]].map(([ico,label,val])=>
+React.createElement("div",{key:label,style:{display:"flex",justifyContent:"space-between",padding:"9px 0",borderBottom:"1px solid #f5f5f5"}},
+React.createElement("div",{style:{color:"#999",fontSize:11}},ico+" "+label),
+React.createElement("div",{style:{color:"#333",fontSize:11,fontWeight:"bold"}},val)))),
+React.createElement("button",{onClick:()=>setMembre(null),style:{width:"100%",background:"none",border:"1px solid #ddd",borderRadius:14,padding:13,color:"#999",fontSize:12,cursor:"pointer"}},"Se déconnecter")));
+return React.createElement("div",{className:"fade",style:{padding:"24px 20px 80px"}},
+React.createElement("div",{style:{textAlign:"center",marginBottom:24}},
+React.createElement("div",{style:{width:70,height:70,borderRadius:35,background:"linear-gradient(135deg,#1a7a3a,#27ae60)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:32,margin:"0 auto 12px"}},"👥"),
+React.createElement("div",{style:{color:"#222",fontSize:18,fontWeight:"bold"}},"Espace Membres AHBAB"),
+React.createElement("div",{style:{color:"#888",fontSize:11,marginTop:3}},"Rejoignez la famille — Soyez récompensé !")),
+[["Prénom *",prenom,setPrenom,"text","Moussa"],["📱 Téléphone *",phone,setPhone,"tel","77 123 45 67"]].map(([label,val,setter,type,ph])=>
+React.createElement("div",{key:label,style:{marginBottom:12}},
+React.createElement("div",{style:{color:"#888",fontSize:11,marginBottom:6}},label),
+React.createElement("input",{type,value:val,onChange:e=>setter(e.target.value),placeholder:ph,style:{width:"100%",background:"#f8f8f8",border:"1px solid "+(val?"#1a7a3a":"#e0e0e0"),borderRadius:12,padding:"13px 14px",fontSize:13,outline:"none",boxSizing:"border-box"}}))),
+React.createElement("button",{onClick:inscrire,disabled:loading||!prenom||!phone,style:{width:"100%",background:prenom&&phone?"linear-gradient(135deg,#1a7a3a,#27ae60)":"#ddd",border:"none",borderRadius:14,padding:15,color:W,fontSize:14,fontWeight:"bold",cursor:"pointer",marginTop:4}},loading?"Inscription...":"✅ Rejoindre AHBAB"),
+React.createElement("div",{style:{textAlign:"center",marginTop:16,color:"#bbb",fontSize:10}},"Association AHBAB Elhadji Malick Seye — Dakar 🇸🇳"));}
+
+function Transparence(){
+const total=CAUSES.reduce((s,c)=>s+c.collecte,0);
+return React.createElement("div",{className:"fade",style:{paddingBottom:80}},
+React.createElement("div",{style:{background:"linear-gradient(135deg,#1a7a3a,#0d4a22)",padding:"16px 20px 20px",textAlign:"center"}},
+React.createElement("div",{style:{color:W,fontSize:16,fontWeight:"bold"}},"🔍 Rapport de Transparence"),
+React.createElement("div",{style:{color:"rgba(255,255,255,0.7)",fontSize:11,marginTop:3}},"Chaque don est tracé et utilisé avec intégrité")),
+React.createElement("div",{style:{padding:16}},
+CAUSES.map((c,i)=>{
+const pct=Math.round((c.collecte/c.objectif)*100);
+return React.createElement("div",{key:i,style:{background:W,borderRadius:14,padding:14,marginBottom:10,boxShadow:"0 2px 6px rgba(0,0,0,0.05)"}},
+React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}},
+React.createElement("div",{style:{color:"#222",fontSize:12,fontWeight:"bold"}},c.emoji+" "+c.titre),
+React.createElement("div",{style:{background:"#e8f5e9",borderRadius:10,padding:"2px 7px",color:G,fontSize:10,fontWeight:"bold"}},pct+"%")),
+React.createElement("div",{style:{background:"#f0f0f0",borderRadius:99,height:6,overflow:"hidden",marginBottom:5}},
+React.createElement("div",{style:{width:pct+"%",height:"100%",background:"linear-gradient(90deg,#1a7a3a,#27ae60)",borderRadius:99}})),
+React.createElement("div",{style:{display:"flex",justifyContent:"space-between"}},
+React.createElement("div",{style:{color:G,fontSize:11,fontWeight:"bold"}},fmt(c.collecte)+" F collectés"),
+React.createElement("div",{style:{color:"#999",fontSize:10}},c.donateurs+" donateurs")));
+}),
+React.createElement("div",{style:{background:"#e8f5e9",borderRadius:14,padding:16,textAlign:"center"}},
+React.createElement("div",{style:{color:G,fontSize:14,fontWeight:"bold",marginBottom:4}},"📊 Total collecté"),
+React.createElement("div",{style:{color:"#222",fontSize:24,fontWeight:"bold"}},fmt(total)+" FCFA"),
+React.createElement("div",{style:{color:"#888",fontSize:10,marginTop:3}},"Géré avec intégrité — Association AHBAB"))));}
+
+function Nav({page,setPage}){
+return React.createElement("div",{style:{position:"fixed",bottom:0,left:"50%",transform:"translateX(-50%)",width:"100%",maxWidth:480,background:W,borderTop:"1px solid #e8e8e8",display:"flex",justifyContent:"space-around",padding:"10px 0 20px",zIndex:100,boxShadow:"0 -4px 20px rgba(0,0,0,0.08)"}},
+[{id:"accueil",icon:"🏠",label:"Accueil"},{id:"dons",icon:"🤲",label:"Dons"},{id:"calendrier",icon:"📅",label:"Calendrier"},{id:"membres",icon:"👥",label:"Membres"},{id:"transparence",icon:"🔍",label:"Rapport"}].map(item=>
+React.createElement("button",{key:item.id,onClick:()=>setPage(item.id),style:{display:"flex",flexDirection:"column",alignItems:"center",gap:3,background:"none",border:"none",cursor:"pointer",padding:"0 6px"}},
+React.createElement("div",{style:{fontSize:22}},item.icon),
+React.createElement("div",{style:{fontSize:9,color:page===item.id?G:"#bbb",fontWeight:page===item.id?"bold":"normal"}},item.label))));}
+
+const root=ReactDOM.createRoot(document.getElementById("root"));
+root.render(React.createElement(App));
+</script>
+</body>
+</html>
